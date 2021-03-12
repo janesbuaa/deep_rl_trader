@@ -15,6 +15,7 @@ from TraderEnv import OhlcvEnv
 # custom normalizer
 from util import NormalizerProcessor
 
+
 def create_model(shape, nb_actions):
     model = Sequential()
     model.add(CuDNNLSTM(64, input_shape=shape, return_sequences=True))
@@ -22,6 +23,8 @@ def create_model(shape, nb_actions):
     model.add(Dense(32))
     model.add(Activation('relu'))
     model.add(Dense(nb_actions, activation='linear'))
+    return model
+
 
 def main():
     # OPTIONS
@@ -63,12 +66,14 @@ def main():
                 'total_reward'], int(info['portfolio'])
             np.array([info]).dump(
                 './info/duel_dqn_{0}_weights_{1}LS_{2}_{3}_{4}.info'.format(ENV_NAME, portfolio, n_long, n_short,
-                                                                     total_reward))
+                                                                            total_reward))
             dqn.save_weights(
-                './model/duel_dqn_{0}_weights_{1}LS_{2}_{3}_{4}.h5f'.format(ENV_NAME, portfolio, n_long, n_short, total_reward),
+                './model/duel_dqn_{0}_weights_{1}LS_{2}_{3}_{4}.h5f'.format(ENV_NAME, portfolio, n_long, n_short,
+                                                                            total_reward),
                 overwrite=True)
         except KeyboardInterrupt:
             continue
+
 
 if __name__ == '__main__':
     main()

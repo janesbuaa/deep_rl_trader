@@ -5,14 +5,15 @@ from sklearn.preprocessing import MinMaxScaler
 import ta
 from ta import zigzag, money_flow_index
 
+
 class FeatureExtractor:
     def __init__(self, df):
-       self.df = df
-       self.open = df['open'].astype('float')
-       self.close = df['close'].astype('float')
-       self.high = df['high'].astype('float')
-       self.low = df['low'].astype('float')
-       self.volume = df['volume'].astype('float')
+        self.df = df
+        self.open = df['open'].astype('float')
+        self.close = df['close'].astype('float')
+        self.high = df['high'].astype('float')
+        self.low = df['low'].astype('float')
+        self.volume = df['volume'].astype('float')
 
     def add_bar_features(self):
         # stationary candle
@@ -25,13 +26,12 @@ class FeatureExtractor:
         self.df['bar_mov'] = self.df['close'] - self.df['close'].shift(1)
         return self.df
 
-
     def add_mv_avg_features(self):
-        self.df['sma5'] = talib.SMA(self.close,5)
-        self.df['sma20'] = talib.SMA(self.close,20)
-        self.df['sma120'] = talib.SMA(self.close,120)
-        self.df['ema12'] = talib.SMA(self.close,5)
-        self.df['ema26'] = talib.SMA(self.close,26)
+        self.df['sma5'] = talib.SMA(self.close, 5)
+        self.df['sma20'] = talib.SMA(self.close, 20)
+        self.df['sma120'] = talib.SMA(self.close, 120)
+        self.df['ema12'] = talib.SMA(self.close, 5)
+        self.df['ema26'] = talib.SMA(self.close, 26)
         return self.df
 
     def add_adj_features(self):
@@ -91,4 +91,3 @@ class FeatureExtractor:
         ## MFI
 
         self.df['mfi14'] = money_flow_index(self.df, 14)
-
