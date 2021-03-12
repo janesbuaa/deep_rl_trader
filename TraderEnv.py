@@ -49,7 +49,7 @@ class OhlcvEnv(gym.Env):
         extractor = process_data.FeatureExtractor(raw_df)
         self.df = extractor.add_bar_features()  # bar features o, h, l, c ---> C(4,2) = 4*3/2*1 = 6 features
 
-        ## selected manual fetuares
+        # selected manual features
         feature_list = [
             'bar_hc',
             'bar_ho',
@@ -93,7 +93,7 @@ class OhlcvEnv(gym.Env):
                 self.action = BUY  # record action as buy
                 self.exit_price = self.closingPrice
                 self.reward += ((self.entry_price - self.exit_price) / self.exit_price + 1) * (
-                            1 - self.fee) ** 2 - 1  # calculate reward
+                        1 - self.fee) ** 2 - 1  # calculate reward
                 self.krw_balance = self.krw_balance * (1.0 + self.reward)  # evaluate cumulative return in krw-won
                 self.entry_price = 0  # clear entry price
                 self.n_short += 1  # record number of short
