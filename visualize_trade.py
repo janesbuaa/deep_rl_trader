@@ -3,13 +3,15 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import time
 
-def show_mdd(xs): # xs is cumulative return / portfolio , if reward u should
+
+def show_mdd(xs):  # xs is cumulative return / portfolio , if reward u should
     # xs = df['reward'].cumsum() / if reward
-    i = np.argmax(np.maximum.accumulate(xs) - xs) # end of the period
-    j = np.argmax(xs[:i]) # start of period
+    i = np.argmax(np.maximum.accumulate(xs) - xs)  # end of the period
+    j = np.argmax(xs[:i])  # start of period
     plt.plot(xs)
     plt.plot([i, j], [xs[i], xs[j]], 'o', color='Red', markersize=10)
     plt.show()
+
 
 def visualize(info):
     closes = [data[2] for data in info['history']]
@@ -25,6 +27,7 @@ def visualize(info):
     plt.scatter(sell_tick, sell_price + 2, c='r', marker="v", s=20)
     plt.show(block=True)
     time.sleep(3)
+
 
 FILENAME = "duel_dqn_OHLCV-v0_weights_1688081LS_794_820_0.6099948635190375.info"
 info = np.load(FILENAME).all()

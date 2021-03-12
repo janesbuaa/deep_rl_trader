@@ -8,15 +8,17 @@ from pandas import DataFrame, Series
 from pandas.stats import moments
 import pandas as pd
 
+
 def simple_moving_average(prices, period=26):
     """
     :param df: pandas dataframe object
     :param period: periods for calculating SMA
     :return: a pandas series
     """
-    weights = np.repeat(1.0, period)/period
+    weights = np.repeat(1.0, period) / period
     sma = np.convolve(prices, weights, 'valid')
     return sma
+
 
 def stochastic_oscillator_k(df):
     """Calculate stochastic oscillator %K for given data.
@@ -28,6 +30,7 @@ def stochastic_oscillator_k(df):
     df = df.join(SOk)
     return df
 
+
 def stochastic_oscillator_d(df, n):
     """Calculate stochastic oscillator %D for given data.
     :param df: pandas.DataFrame
@@ -38,6 +41,7 @@ def stochastic_oscillator_d(df, n):
     SOd = pd.Series(SOk.ewm(span=n, min_periods=n).mean(), name='SO%d')
     df = df.join(SOd)
     return df
+
 
 def bollinger_bands(df, n, std, add_ave=True):
     """
@@ -57,6 +61,7 @@ def bollinger_bands(df, n, std, add_ave=True):
         df = df.join(pd.concat([upband, dnband], axis=1))
 
     return df
+
 
 def money_flow_index(df, n):
     """Calculate Money Flow Index and Ratio for given data.
@@ -88,7 +93,9 @@ def series_indicator(col):
             if isinstance(s, DataFrame):
                 s = s[col]
             return f(s, *args, **kwargs)
+
         return wrapper
+
     return inner_series_indicator
 
 
@@ -96,10 +103,10 @@ def _wilder_sum(s, n):
     s = s.dropna()
 
     nf = (n - 1) / n
-    ws = [np.nan]*(n - 1) + [s[n - 1] + nf*sum(s[:n - 1])]
+    ws = [np.nan] * (n - 1) + [s[n - 1] + nf * sum(s[:n - 1])]
 
     for v in s[n:]:
-        ws.append(v + ws[-1]*nf)
+        ws.append(v + ws[-1] * nf)
 
     return Series(ws, index=s.index)
 
@@ -116,7 +123,7 @@ def llv(s, n):
 
 @series_indicator('close')
 def ema(s, n, wilder=False):
-    span = n if not wilder else 2*n - 1
+    span = n if not wilder else 2 * n - 1
     return moments.ewma(s, span=span)
 
 
@@ -125,7 +132,7 @@ def macd(s, nfast=12, nslow=26, nsig=9, percent=True):
     fast, slow = ema(s, nfast), ema(s, nslow)
 
     if percent:
-        macd = 100*(fast / slow - 1)
+        macd = 100 * (fast / slow - 1)
     else:
         macd = fast - slow
 
@@ -148,13 +155,13 @@ def rsi(s, n=14):
     diff = s.diff()
     which_dn = diff < 0
 
-    up, dn = diff, diff*0
+    up, dn = diff, diff * 0
     up[which_dn], dn[which_dn] = 0, -up[which_dn]
 
     emaup = ema(up, n, wilder=True)
     emadn = ema(dn, n, wilder=True)
 
-    return 100 * emaup/(emaup + emadn)
+    return 100 * emaup / (emaup + emadn)
 
 
 def stoch(s, nfastk=14, nfullk=3, nfulld=3):
@@ -163,7 +170,7 @@ def stoch(s, nfastk=14, nfullk=3, nfulld=3):
 
     hmax, lmin = hhv(s, nfastk), llv(s, nfastk)
 
-    fastk = 100 * (s.close - lmin)/(hmax - lmin)
+    fastk = 100 * (s.close - lmin) / (hmax - lmin)
     fullk = moments.rolling_mean(fastk, nfullk)
     fulld = moments.rolling_mean(fullk, nfulld)
 
@@ -190,18 +197,18 @@ def cci(s, n=20, c=0.015):
     mavg = moments.rolling_mean(s, n)
     mdev = moments.rolling_apply(s, n, lambda x: np.fabs(x - x.mean()).mean())
 
-    return (s - mavg)/(c * mdev)
+    return (s - mavg) / (c * mdev)
 
 
 def cmf(s, n=20):
-    clv = (2*s.close - s.high - s.low) / (s.high - s.low)
+    clv = (2 * s.close - s.high - s.low) / (s.high - s.low)
     vol = s.volume
 
-    return moments.rolling_sum(clv*vol, n) / moments.rolling_sum(vol, n)
+    return moments.rolling_sum(clv * vol, n) / moments.rolling_sum(vol, n)
 
 
 def force(s, n=2):
-    return ema(s.close.diff()*s.volume, n)
+    return ema(s.close.diff() * s.volume, n)
 
 
 @series_indicator('close')
@@ -211,7 +218,7 @@ def kst(s, r1=10, r2=15, r3=20, r4=30, n1=10, n2=10, n3=10, n4=15, nsig=9):
     rocma3 = moments.rolling_mean(s / s.shift(r3) - 1, n3)
     rocma4 = moments.rolling_mean(s / s.shift(r4) - 1, n4)
 
-    kst = 100*(rocma1 + 2*rocma2 + 3*rocma3 + 4*rocma4)
+    kst = 100 * (rocma1 + 2 * rocma2 + 3 * rocma3 + 4 * rocma4)
     sig = moments.rolling_mean(kst, nsig)
 
     return DataFrame(dict(kst=kst, signal=sig))
@@ -237,13 +244,13 @@ def ultimate(s, n1=7, n2=14, n3=28):
     avg2 = moments.rolling_sum(bp, n2) / moments.rolling_sum(tr, n2)
     avg3 = moments.rolling_sum(bp, n3) / moments.rolling_sum(tr, n3)
 
-    return 100*(4*avg1 + 2*avg2 + avg3) / 7
+    return 100 * (4 * avg1 + 2 * avg2 + avg3) / 7
 
 
 def auto_envelope(s, nema=22, nsmooth=100, ndev=2.7):
     sema = ema(s.close, nema)
-    mdiff = s[['high','low']].sub(sema, axis=0).abs().max(axis=1)
-    csize = moments.ewmstd(mdiff, nsmooth)*ndev
+    mdiff = s[['high', 'low']].sub(sema, axis=0).abs().max(axis=1)
+    csize = moments.ewmstd(mdiff, nsmooth) * ndev
 
     return DataFrame(dict(ema=sema, lenv=sema - csize, henv=sema + csize))
 
@@ -253,8 +260,8 @@ def bbands(s, n=20, ndev=2):
     mavg = moments.rolling_mean(s, n)
     mstd = moments.rolling_std(s, n)
 
-    hband = mavg + ndev*mstd
-    lband = mavg - ndev*mstd
+    hband = mavg + ndev * mstd
+    lband = mavg - ndev * mstd
 
     return DataFrame(dict(ma=mavg, lband=lband, hband=hband))
 
@@ -267,11 +274,11 @@ def safezone(s, position, nmean=10, npen=2.0, nagg=3):
 
     # Compute the average upside/downside penetration
     pen = moments.rolling_apply(
-        sgn*s.diff(), nmean,
+        sgn * s.diff(), nmean,
         lambda x: x[x > 0].mean() if (x > 0).any() else 0
     )
 
-    stop = s + sgn*npen*pen
+    stop = s + sgn * npen * pen
     return hhv(stop, nagg) if position == 'long' else llv(stop, nagg)
 
 
@@ -296,7 +303,7 @@ def sar(s, af=0.02, amax=0.2):
             xpt0 = min(lmin, xpt1)
 
         if sig0 == sig1:
-            sari = sar[-1] + (xpt1 - sar[-1])*af1
+            sari = sar[-1] + (xpt1 - sar[-1]) * af1
             af0 = min(amax, af1 + af)
 
             if sig0:
@@ -328,7 +335,7 @@ def adx(s, n=14):
     dip = 100 * _wilder_sum(pos, n) / trs
     din = 100 * _wilder_sum(neg, n) / trs
 
-    dx = 100 * np.abs((dip - din)/(dip + din))
+    dx = 100 * np.abs((dip - din) / (dip + din))
     adx = ema(dx, n, wilder=True)
 
     return DataFrame(dict(adx=adx, dip=dip, din=din))
@@ -336,9 +343,9 @@ def adx(s, n=14):
 
 def chandelier(s, position, n=22, npen=3):
     if position == 'long':
-        return hhv(s, n) - npen*atr(s, n)
+        return hhv(s, n) - npen * atr(s, n)
     else:
-        return llv(s, n) + npen*atr(s, n)
+        return llv(s, n) + npen * atr(s, n)
 
 
 def vortex(s, n=14):

@@ -4,6 +4,8 @@ from rl.util import WhiteningNormalizer
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
 ADDITIONAL_STATE = 4
+
+
 class NormalizerProcessor(Processor):
     def __init__(self):
         self.scaler = StandardScaler()
@@ -16,7 +18,7 @@ class NormalizerProcessor(Processor):
             observe = batch[i][..., :-ADDITIONAL_STATE]
             observe = self.scaler.fit_transform(observe)
             agent_state = batch[i][..., -ADDITIONAL_STATE:]
-            temp = np.concatenate((observe, agent_state),axis=1)
+            temp = np.concatenate((observe, agent_state), axis=1)
             temp = temp.reshape((1,) + temp.shape)
             k.append(temp)
         batch = np.concatenate(tuple(k))
