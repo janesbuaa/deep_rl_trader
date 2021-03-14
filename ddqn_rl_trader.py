@@ -24,6 +24,18 @@ def create_model(shape, nb_actions):
     model.add(Activation('relu'))
     model.add(Dense(nb_actions, activation='linear'))
     return model
+    #
+    # model = Sequential()
+    # model.add(Bidirectional(LSTM(256, return_sequences=True), input_shape=(train_X.shape[1], train_X.shape[2])))
+    # model.add(Dropout(0.4))
+    # model.add(Bidirectional(LSTM(256)))
+    # model.add(Dense(256))  # 输出的变量数
+    # model.add(Dense(2))  # 输出的变量数
+    # model.add(Activation('relu'))
+    # adam = optimizers.Adam(lr=0.0001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.00002)
+    # model.compile(loss='mse', optimizer=adam)
+    #
+    # history = model.fit(train_X, train_y, epochs=250, batch_size=10000, validation_data=(test_X, test_y))
 
 
 def main():

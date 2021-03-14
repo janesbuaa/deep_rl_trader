@@ -66,28 +66,28 @@ class FeatureExtractor:
         self.df['macd'] = macd
         self.df['signal'] = macdsignal
 
-        ## addtional info
+        # addtional info
         self.df['adx'] = talib.ADX(self.high, self.low, self.close, timeperiod=14)
         self.df['cci'] = talib.CCI(self.high, self.low, self.close, timeperiod=14)
 
-        ## maximum profit
+        # maximum profit
         self.df['plus_di'] = talib.PLUS_DI(self.high, self.low, self.close, timeperiod=14)
 
-        ## lower_bound
+        # lower_bound
         self.df['lower_bound'] = self.df['open'] - self.df['low'] + 1
 
-        ## ATR
+        # ATR
         self.df['atr'] = talib.ATR(self.high, self.low, self.close, timeperiod=14)
 
-        ## STOCH momentum
+        # STOCH momentum
         self.df = ta.stochastic_oscillator_k(self.df)
         self.df = ta.stochastic_oscillator_d(self.df, n=10)
 
-        ## TRIX
+        # TRIX
         self.df['trix'] = talib.TRIX(self.close, timeperiod=5)
         self.df['trix_signal'] = ta.moving_average(self.df['trix'], n=3)
         self.df['trix_hist'] = self.df['trix'] - self.df['trix_signal']
 
-        ## MFI
+        # MFI
 
         self.df['mfi14'] = money_flow_index(self.df, 14)

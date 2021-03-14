@@ -54,7 +54,7 @@ def main():
                    processor=NormalizerProcessor())
     dqn.compile(Adam(lr=1e-3), metrics=['mae'])
 
-    ### now only test
+    # now only test
     dqn.load_weights("./model/duel_dqn_OHLCV-v0_weights_49112166LS_184_297_4.033341265853485.h5f")
     # validate
     info = dqn.test(env_test, nb_episodes=1, visualize=False)
