@@ -41,7 +41,7 @@ class OhlcvEnv(gym.Env):
         self.observation_space = spaces.Box(low=-np.inf, high=np.inf, shape=self.shape, dtype=np.float32)
 
     def load_from_csv(self):
-        if (len(self.file_list) == 0):
+        if len(self.file_list) == 0:
             self.file_list = [x.name for x in Path(self.path).iterdir() if x.is_file()]
             self.file_list.sort()
         self.rand_episode = self.file_list.pop()
@@ -137,9 +137,9 @@ class OhlcvEnv(gym.Env):
                                                     "n_trades": {'long': self.n_long, 'short': self.n_short}}
 
     def get_profit(self):
-        if (self.position == LONG):
+        if self.position == LONG:
             profit = ((self.closingPrice - self.entry_price) / self.entry_price + 1) * (1 - self.fee) ** 2 - 1
-        elif (self.position == SHORT):
+        elif self.position == SHORT:
             profit = ((self.entry_price - self.closingPrice) / self.closingPrice + 1) * (1 - self.fee) ** 2 - 1
         else:
             profit = 0
@@ -164,7 +164,8 @@ class OhlcvEnv(gym.Env):
         self.position = FLAT
         self.done = False
 
-        self.updateState()  # returns observed_features +  opened position(LONG/SHORT/FLAT) + profit_earned(during opened position)
+        # returns observed_features +  opened position(LONG/SHORT/FLAT) + profit_earned(during opened position)
+        self.updateState()
         return self.state
 
     def updateState(self):

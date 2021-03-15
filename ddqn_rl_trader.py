@@ -2,7 +2,7 @@ import numpy as np
 
 # import keras
 from keras.models import Sequential
-from keras.layers import Dense, Activation, Flatten, CuDNNLSTM
+from keras.layers import Dense, Activation, Flatten, CuDNNLSTM, Dropout, Bidirectional
 from keras.optimizers import Adam
 
 # keras-rl agent
@@ -19,6 +19,7 @@ from util import NormalizerProcessor
 def create_model(shape, nb_actions):
     model = Sequential()
     model.add(CuDNNLSTM(64, input_shape=shape, return_sequences=True))
+    model.add(Dropout(0.2))
     model.add(CuDNNLSTM(64))
     model.add(Dense(32))
     model.add(Activation('relu'))
@@ -27,7 +28,6 @@ def create_model(shape, nb_actions):
     #
     # model = Sequential()
     # model.add(Bidirectional(LSTM(256, return_sequences=True), input_shape=(train_X.shape[1], train_X.shape[2])))
-    # model.add(Dropout(0.4))
     # model.add(Bidirectional(LSTM(256)))
     # model.add(Dense(256))  # 输出的变量数
     # model.add(Dense(2))  # 输出的变量数

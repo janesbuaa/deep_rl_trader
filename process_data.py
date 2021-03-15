@@ -66,7 +66,7 @@ class FeatureExtractor:
         self.df['macd'] = macd
         self.df['signal'] = macdsignal
 
-        # addtional info
+        # additional info
         self.df['adx'] = talib.ADX(self.high, self.low, self.close, timeperiod=14)
         self.df['cci'] = talib.CCI(self.high, self.low, self.close, timeperiod=14)
 
