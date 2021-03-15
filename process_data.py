@@ -43,6 +43,8 @@ class FeatureExtractor:
 
     # note! this is not a complete list
     # additional indicator can help in some scenario but usually acts as a noise
+    # 注意！ 这不是一个完整的列表
+    # 其他指标可以在某些情况下提供帮助，但通常会产生噪声
     def add_ta_features(self):
         obv = talib.OBV(self.close, self.volume)
         obv_mv_avg = talib.MA(obv, timeperiod=10)
@@ -85,9 +87,10 @@ class FeatureExtractor:
 
         # TRIX
         self.df['trix'] = talib.TRIX(self.close, timeperiod=5)
-        self.df['trix_signal'] = ta.moving_average(self.df['trix'], n=3)
+        self.df['trix_signal'] = talib.SMA(self.df['trix'], timeperiod=3)
         self.df['trix_hist'] = self.df['trix'] - self.df['trix_signal']
 
         # MFI
 
         self.df['mfi14'] = money_flow_index(self.df, 14)
+        return self.df

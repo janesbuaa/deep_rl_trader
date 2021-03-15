@@ -48,6 +48,9 @@ class OhlcvEnv(gym.Env):
         raw_df = pd.read_csv(self.path + self.rand_episode)
         extractor = process_data.FeatureExtractor(raw_df)
         self.df = extractor.add_bar_features()  # bar features o, h, l, c ---> C(4,2) = 4*3/2*1 = 6 features
+        self.df = extractor.add_mv_avg_features()
+        self.df = extractor.add_adj_features()
+        self.df = extractor.add_ta_features()
 
         # selected manual features
         feature_list = [
