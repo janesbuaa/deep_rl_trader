@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5f43a4a0-902d-440a-bdd1-d564c4821bae" name="Default Changelist" comment="is ok running">
+    <list default="true" id="5f43a4a0-902d-440a-bdd1-d564c4821bae" name="Default Changelist" comment="modify note">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraderEnv.py" beforeDir="false" afterPath="$PROJECT_DIR$/TraderEnv.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ddqn_rl_trader.py" beforeDir="false" afterPath="$PROJECT_DIR$/ddqn_rl_trader.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +129,8 @@
       <workItem from="1615773554122" duration="18332000" />
       <workItem from="1615818895346" duration="262000" />
       <workItem from="1615867216492" duration="9281000" />
-      <workItem from="1615892389778" duration="4690000" />
+      <workItem from="1615892389778" duration="6108000" />
+      <workItem from="1615898860630" duration="2112000" />
     </task>
     <task id="LOCAL-00001" summary="is ok running">
       <created>1615730511109</created>
@@ -151,7 +153,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615780081856</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="modify note">
+      <created>1615897302570</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1615897302570</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -171,7 +180,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="is ok running" />
-    <option name="LAST_COMMIT_MESSAGE" value="is ok running" />
+    <MESSAGE value="modify note" />
+    <option name="LAST_COMMIT_MESSAGE" value="modify note" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -180,11 +190,6 @@
           <url>file://$USER_HOME$/anaconda3/envs/py36/Lib/site-packages/keras/engine/training.py</url>
           <line>1513</line>
           <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$USER_HOME$/anaconda3/envs/py36/Lib/site-packages/tensorflow/python/keras/backend.py</url>
-          <line>3072</line>
-          <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$USER_HOME$/anaconda3/envs/py36/Lib/site-packages/tensorflow/python/client/session.py</url>
@@ -197,20 +202,15 @@
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$USER_HOME$/anaconda3/envs/py36/Lib/site-packages/tensorflow/python/client/session.py</url>
-          <line>1423</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$USER_HOME$/anaconda3/envs/py36/Lib/site-packages/rl/agents/dqn.py</url>
-          <line>333</line>
+          <line>335</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/deep_rl_trader$ddqn_rl_trader.coverage" NAME="ddqn_rl_trader Coverage Results" MODIFIED="1615896893878" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/deep_rl_trader$ddqn_rl_trader.coverage" NAME="ddqn_rl_trader Coverage Results" MODIFIED="1615901018179" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/deep_rl_trader$test.coverage" NAME="test Coverage Results" MODIFIED="1615769621195" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/deep_rl_trader$load_test.coverage" NAME="load_test Coverage Results" MODIFIED="1615646009028" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>

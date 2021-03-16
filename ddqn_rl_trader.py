@@ -2,7 +2,7 @@ import numpy as np
 
 # import keras
 from keras.models import Sequential
-from keras.layers import Dense, Activation, Flatten, CuDNNLSTM, Dropout, Bidirectional
+from keras.layers import Dense, Activation, Flatten, CuDNNLSTM, Dropout, Bidirectional, LSTM
 from keras.optimizers import Adam
 
 # keras-rl agent
@@ -19,7 +19,7 @@ from util import NormalizerProcessor
 def create_model(shape, nb_actions):
     model = Sequential()
     model.add(CuDNNLSTM(64, input_shape=shape, return_sequences=True))
-    model.add(Dropout(0.2))
+    model.add(Dropout(0.3))
     model.add(CuDNNLSTM(64))
     model.add(Dense(32))
     model.add(Activation('relu'))
@@ -58,12 +58,12 @@ def main():
     print(model.summary())
 
     # Finally, we configure and compile our agent. You can use every built-in Keras optimizer and even the metrics!
-    memory = SequentialMemory(limit=50000, window_length=TIME_STEP)
+    memory = SequentialMemory(limit=5000, window_length=TIME_STEP)
     # policy = BoltzmannQPolicy()
     policy = EpsGreedyQPolicy()
     # enable the dueling network
     # you can specify the dueling_type to one of {'avg','max','naive'}
-    dqn = DQNAgent(model=model, nb_actions=nb_actions, memory=memory, nb_steps_warmup=200,
+    dqn = DQNAgent(model=model, nb_actions=nb_actions, memory=memory, batch_size=32, nb_steps_warmup=200,
                    enable_dueling_network=True, dueling_type='avg', target_model_update=1e-2, policy=policy,
                    processor=NormalizerProcessor())
     dqn.compile(Adam(lr=1e-3), metrics=['mae'])
