@@ -62,7 +62,7 @@ class OhlcvEnv(gym.Env):
             'bar_co', 'close']
         self.df.dropna(inplace=True)  # drops Nan rows
         self.closingPrices = self.df['close'].values
-        self.df = np.array(self.df)[:, 2:] #self.df[feature_list].values
+        self.df = np.array(self.df)[:, raw_df.shape[1]:]
 
     def render(self, mode='human', verbose=False):
         return None
