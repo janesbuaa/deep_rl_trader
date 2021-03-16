@@ -4,7 +4,6 @@
     <list default="true" id="5f43a4a0-902d-440a-bdd1-d564c4821bae" name="Default Changelist" comment="modify note">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TraderEnv.py" beforeDir="false" afterPath="$PROJECT_DIR$/TraderEnv.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ddqn_rl_trader.py" beforeDir="false" afterPath="$PROJECT_DIR$/ddqn_rl_trader.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +129,7 @@
       <workItem from="1615818895346" duration="262000" />
       <workItem from="1615867216492" duration="9281000" />
       <workItem from="1615892389778" duration="6108000" />
-      <workItem from="1615898860630" duration="2112000" />
+      <workItem from="1615898860630" duration="6181000" />
     </task>
     <task id="LOCAL-00001" summary="is ok running">
       <created>1615730511109</created>
@@ -160,7 +159,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615897302570</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="modify note">
+      <created>1615901218823</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1615901218823</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,7 +216,7 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/deep_rl_trader$ddqn_rl_trader.coverage" NAME="ddqn_rl_trader Coverage Results" MODIFIED="1615901018179" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/deep_rl_trader$ddqn_rl_trader.coverage" NAME="ddqn_rl_trader Coverage Results" MODIFIED="1615905464755" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/deep_rl_trader$test.coverage" NAME="test Coverage Results" MODIFIED="1615769621195" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/deep_rl_trader$load_test.coverage" NAME="load_test Coverage Results" MODIFIED="1615646009028" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
