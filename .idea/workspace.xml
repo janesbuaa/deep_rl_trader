@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5f43a4a0-902d-440a-bdd1-d564c4821bae" name="Default Changelist" comment="modify note">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1530467LS_0_0_0.5310697502391002.h5f" beforeDir="false" afterPath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1530467LS_0_0_0.5310697502391002.h5f" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +31,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/anaconda3/envs/py36/Lib/site-packages/tensorflow/python/ops/math_ops.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Deep-RL-Keras/main.py" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager" selected="Python.ddqn_rl_trader">
@@ -128,7 +129,7 @@
       <workItem from="1615818895346" duration="262000" />
       <workItem from="1615867216492" duration="9281000" />
       <workItem from="1615892389778" duration="6108000" />
-      <workItem from="1615898860630" duration="12293000" />
+      <workItem from="1615898860630" duration="15841000" />
     </task>
     <task id="LOCAL-00001" summary="is ok running">
       <created>1615730511109</created>
