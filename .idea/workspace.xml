@@ -3,7 +3,169 @@
   <component name="ChangeListManager">
     <list default="true" id="5f43a4a0-902d-440a-bdd1-d564c4821bae" name="Default Changelist" comment="modify note">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1530467LS_0_0_0.5310697502391002.h5f" beforeDir="false" afterPath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1530467LS_0_0_0.5310697502391002.h5f" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraderEnv.py" beforeDir="false" afterPath="$PROJECT_DIR$/TraderEnv.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_1000000LS_0_0_0.0.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_1022786LS_1_0_0.022786805557506895.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_1055025LS_2_0_0.054290130055823616.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_1077958LS_3_2_0.07581956136152468.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_1190396LS_0_9_0.1767519731599494.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_1392117LS_2_66_0.35557983778175994.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_1443448LS_40_61_0.38383767537321833.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_1474860LS_0_26_0.5623609066610594.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_1506662LS_6_18_0.4288695933247002.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_1511533LS_0_5_0.5088667133588688.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_1521497LS_0_1_0.5284367752413021.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_1530467LS_0_0_0.5310697502391002.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_1531969LS_0_36_0.44469311570596504.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_1546628LS_0_44_0.45232235750940375.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_1548080LS_0_4_0.550800861873026.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_1553717LS_0_2_0.5182183727374268.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_1571030LS_17_16_0.5791916094047878.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_1589737LS_0_0_0.590363435963432.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_1624551LS_1_15_0.5072012128357338.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_1641877LS_4_0_0.6218678795282775.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_1749402LS_0_0_0.7500910708720114.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_1762997LS_0_0_0.7636920869338961.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_1766899LS_0_27_0.5913620442003168.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_1862605LS_0_0_0.8633392004781999.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_1891127LS_0_1_0.9112969325561365.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_1941033LS_0_0_0.941797954289733.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_2072841LS_31_106_0.8041176067570842.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_2130979LS_0_0_1.1318187613361461.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_501789LS_371_10_-0.5000989487160974.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_520212LS_0_0_-0.4799921095305728.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_568661LS_56_9_-0.30575075352893166.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_571715LS_196_7_-0.38110886293299095.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_572791LS_69_0_-0.30190508924704473.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_576515LS_49_3_-0.3558974631276892.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_578164LS_6_0_-0.2954513174130763.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_603753LS_86_15_-0.3236898827480885.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_613315LS_153_2_-0.28430101181814404.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_621858LS_162_0_-0.24688835158784084.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_622819LS_88_3_-0.2970971050720389.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_625058LS_140_1_-0.24582456544283882.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_627995LS_33_0_-0.20748097681059274.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_633537LS_3_0_-0.41791045317908593.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_635339LS_35_0_-0.29562648913445544.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_637363LS_9_0_-0.19814267228707771.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_637791LS_7_0_-0.3856980510741066.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_638569LS_2_0_-0.40405125622483107.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_640643LS_16_0_-0.19023058043347207.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_641694LS_10_0_-0.19218932090386076.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_642003LS_3_0_-0.4105162584589851.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_644865LS_1_0_-0.36078021636167557.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_645527LS_6_0_-0.18865345457532745.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_646603LS_23_1_-0.17595731218354427.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_649258LS_20_0_-0.17570294847922874.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_649450LS_2_0_-0.3907463710357665.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_649782LS_3_0_-0.40078056240370563.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_650412LS_8_0_-0.18342046403152634.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_650832LS_2_0_-0.386748091100268.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_650855LS_30_0_-0.17113198953373954.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_651265LS_42_1_-0.25451981565073734.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_651268LS_1_0_-0.21863676158038015.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_651401LS_1_0_-0.35309440081173427.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_651815LS_5_0_-0.37530298694280584.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_652089LS_0_0_-0.3481671887618383.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_652785LS_1_0_-0.37928510799172477.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_658290LS_18_0_-0.23698369809112496.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_661254LS_1_0_-0.35945019938250344.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_662102LS_97_7_-0.26735843733580456.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_662288LS_4_0_-0.16250405636580156.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_663197LS_1_0_-0.3573599338274781.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_664603LS_54_6_-0.24133125455392956.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_666108LS_54_2_-0.22576000978267174.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_668015LS_31_2_-0.2628508537347862.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_668762LS_10_0_-0.20943312120543334.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_679353LS_43_1_-0.1901654669891717.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_681738LS_32_0_-0.16355963621762493.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_691469LS_30_0_-0.11154067715352434.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_693739LS_19_0_-0.11332900581006955.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_694043LS_24_0_-0.10685964849786334.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_724172LS_100_0_-0.15681353231459272.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_757536LS_92_5_-0.09823923466575757.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/info/duel_dqn_OHLCV-v0_weights_789761LS_110_2_-0.04373213256949471.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1000000LS_0_0_0.0.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1022786LS_1_0_0.022786805557506895.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1055025LS_2_0_0.054290130055823616.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1077958LS_3_2_0.07581956136152468.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1190396LS_0_9_0.1767519731599494.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1392117LS_2_66_0.35557983778175994.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1443448LS_40_61_0.38383767537321833.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1474860LS_0_26_0.5623609066610594.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1506662LS_6_18_0.4288695933247002.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1511533LS_0_5_0.5088667133588688.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1521497LS_0_1_0.5284367752413021.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1530467LS_0_0_0.5310697502391002.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1531969LS_0_36_0.44469311570596504.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1546628LS_0_44_0.45232235750940375.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1548080LS_0_4_0.550800861873026.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1553717LS_0_2_0.5182183727374268.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1571030LS_17_16_0.5791916094047878.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1589737LS_0_0_0.590363435963432.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1624551LS_1_15_0.5072012128357338.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1641877LS_4_0_0.6218678795282775.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1749402LS_0_0_0.7500910708720114.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1762997LS_0_0_0.7636920869338961.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1766899LS_0_27_0.5913620442003168.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1862605LS_0_0_0.8633392004781999.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1891127LS_0_1_0.9112969325561365.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_1941033LS_0_0_0.941797954289733.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_2072841LS_31_106_0.8041176067570842.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_2130979LS_0_0_1.1318187613361461.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_501789LS_371_10_-0.5000989487160974.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_520212LS_0_0_-0.4799921095305728.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_568661LS_56_9_-0.30575075352893166.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_571715LS_196_7_-0.38110886293299095.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_572791LS_69_0_-0.30190508924704473.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_576515LS_49_3_-0.3558974631276892.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_578164LS_6_0_-0.2954513174130763.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_603753LS_86_15_-0.3236898827480885.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_613315LS_153_2_-0.28430101181814404.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_621858LS_162_0_-0.24688835158784084.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_622819LS_88_3_-0.2970971050720389.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_625058LS_140_1_-0.24582456544283882.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_627995LS_33_0_-0.20748097681059274.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_633537LS_3_0_-0.41791045317908593.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_635339LS_35_0_-0.29562648913445544.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_637363LS_9_0_-0.19814267228707771.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_637791LS_7_0_-0.3856980510741066.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_638569LS_2_0_-0.40405125622483107.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_640643LS_16_0_-0.19023058043347207.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_641694LS_10_0_-0.19218932090386076.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_642003LS_3_0_-0.4105162584589851.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_644865LS_1_0_-0.36078021636167557.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_645527LS_6_0_-0.18865345457532745.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_646603LS_23_1_-0.17595731218354427.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_649258LS_20_0_-0.17570294847922874.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_649450LS_2_0_-0.3907463710357665.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_649782LS_3_0_-0.40078056240370563.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_650412LS_8_0_-0.18342046403152634.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_650832LS_2_0_-0.386748091100268.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_650855LS_30_0_-0.17113198953373954.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_651265LS_42_1_-0.25451981565073734.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_651268LS_1_0_-0.21863676158038015.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_651401LS_1_0_-0.35309440081173427.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_651815LS_5_0_-0.37530298694280584.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_652089LS_0_0_-0.3481671887618383.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_652785LS_1_0_-0.37928510799172477.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_658290LS_18_0_-0.23698369809112496.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_661254LS_1_0_-0.35945019938250344.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_662102LS_97_7_-0.26735843733580456.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_662288LS_4_0_-0.16250405636580156.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_663197LS_1_0_-0.3573599338274781.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_664603LS_54_6_-0.24133125455392956.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_666108LS_54_2_-0.22576000978267174.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_668015LS_31_2_-0.2628508537347862.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_668762LS_10_0_-0.20943312120543334.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_679353LS_43_1_-0.1901654669891717.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_681738LS_32_0_-0.16355963621762493.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_691469LS_30_0_-0.11154067715352434.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_693739LS_19_0_-0.11332900581006955.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_694043LS_24_0_-0.10685964849786334.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_724172LS_100_0_-0.15681353231459272.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_757536LS_92_5_-0.09823923466575757.h5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/duel_dqn_OHLCV-v0_weights_789761LS_110_2_-0.04373213256949471.h5f" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +197,28 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager" selected="Python.ddqn_rl_trader">
+    <configuration name="TraderEnv" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="deep_rl_trader" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TraderEnv.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="ddqn_rl_trader" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="deep_rl_trader" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -104,6 +288,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.ddqn_rl_trader" />
+        <item itemvalue="Python.TraderEnv" />
         <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
@@ -129,7 +314,10 @@
       <workItem from="1615818895346" duration="262000" />
       <workItem from="1615867216492" duration="9281000" />
       <workItem from="1615892389778" duration="6108000" />
-      <workItem from="1615898860630" duration="15841000" />
+      <workItem from="1615898860630" duration="19902000" />
+      <workItem from="1615981364182" duration="13000" />
+      <workItem from="1615981916546" duration="46000" />
+      <workItem from="1615988845577" duration="1292000" />
     </task>
     <task id="LOCAL-00001" summary="is ok running">
       <created>1615730511109</created>
@@ -233,12 +421,18 @@
           <line>335</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/TraderEnv.py</url>
+          <line>63</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/deep_rl_trader$ddqn_rl_trader.coverage" NAME="ddqn_rl_trader Coverage Results" MODIFIED="1615906906635" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/deep_rl_trader$ddqn_rl_trader.coverage" NAME="ddqn_rl_trader Coverage Results" MODIFIED="1615990114256" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/deep_rl_trader$test.coverage" NAME="test Coverage Results" MODIFIED="1615769621195" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/deep_rl_trader$load_test.coverage" NAME="load_test Coverage Results" MODIFIED="1615646009028" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/deep_rl_trader$TraderEnv.coverage" NAME="TraderEnv Coverage Results" MODIFIED="1615989734246" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

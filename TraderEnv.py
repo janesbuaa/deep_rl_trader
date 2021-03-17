@@ -46,6 +46,7 @@ class OhlcvEnv(gym.Env):
             self.file_list.sort()
         self.rand_episode = self.file_list.pop()
         raw_df = pd.read_csv(self.path + self.rand_episode)
+        col = raw_df.shape[1]
         extractor = process_data.FeatureExtractor(raw_df)
         self.df = extractor.add_bar_features()  # bar features o, h, l, c ---> C(4,2) = 4*3/2*1 = 6 features
         self.df = extractor.add_mv_avg_features()
@@ -61,8 +62,8 @@ class OhlcvEnv(gym.Env):
             'bar_ol',
             'bar_co', 'close']
         self.df.dropna(inplace=True)  # drops Nan rows
-        self.closingPrices = self.df['close'].values
-        self.df = np.array(self.df)[:, raw_df.shape[1]:]
+        self.closingPrices = self.df['close'].values.astype(np.float32)
+        self.df = np.array(self.df)[:, col:].astype(np.float32)
 
     def render(self, mode='human', verbose=False):
         return None
