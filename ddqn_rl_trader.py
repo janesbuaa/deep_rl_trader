@@ -71,7 +71,9 @@ def main():
     while True:
         # train
         dqn.fit(env, nb_steps=5500, nb_max_episode_steps=10000, visualize=False, verbose=2)
+        print('train finished once!')
         try:
+            pass
             # validate
             info = dqn.test(env_test, nb_episodes=1, visualize=False)
             n_long, n_short, total_reward, portfolio = info['n_trades']['long'], info['n_trades']['short'], info[

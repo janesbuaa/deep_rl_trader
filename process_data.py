@@ -38,7 +38,6 @@ class FeatureExtractor:
         self.df['adj_open'] = self.df['open'] / self.close
         self.df['adj_high'] = self.df['high'] / self.close
         self.df['adj_low'] = self.df['low'] / self.close
-        self.df['adj_close'] = self.df['close'] / self.close
         return self.df
 
     # note! this is not a complete list

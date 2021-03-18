@@ -7,6 +7,7 @@ from gym.utils import seeding
 import numpy as np
 import math
 from pathlib import Path
+from sklearn.preprocessing import MinMaxScaler
 
 # position constant
 LONG = 0
@@ -53,17 +54,12 @@ class OhlcvEnv(gym.Env):
         self.df = extractor.add_adj_features()
         self.df = extractor.add_ta_features()
 
-        # selected manual features
-        feature_list = [
-            'bar_hc',
-            'bar_ho',
-            'bar_hl',
-            'bar_cl',
-            'bar_ol',
-            'bar_co', 'close']
         self.df.dropna(inplace=True)  # drops Nan rows
-        self.closingPrices = self.df['close'].values.astype(np.float32)
-        self.df = np.array(self.df)[:, col:].astype(np.float32)
+        self.df['closingPrices'] = self.df['close']
+        self.df = self.df.iloc[:, col:].astype(np.float32)
+        self.df = self.df.apply(lambda x: (x - np.min(x)) / (np.max(x) - np.min(x)))
+        self.closingPrices = self.df['closingPrices'].values
+        self.df = self.df.values
 
     def render(self, mode='human', verbose=False):
         return None
@@ -96,9 +92,9 @@ class OhlcvEnv(gym.Env):
                 self.position = FLAT  # update position to flat
                 self.action = BUY  # record action as buy
                 self.exit_price = self.closingPrice
-                self.reward += ((self.entry_price - self.exit_price) / self.exit_price + 1) * (
-                        1 - self.fee) ** 2 - 1  # calculate reward
-                self.krw_balance = self.krw_balance * (1.0 + self.reward)  # evaluate cumulative return in krw-won
+                # calculate reward
+                self.reward += ((self.entry_price - self.exit_price) / self.exit_price + 1) * (1 - self.fee) ** 2 - 1  
+                self.usdt_balance = self.usdt_balance * (1.0 + self.reward)  # evaluate cumulative return in usdt
                 self.entry_price = 0  # clear entry price
                 self.n_short += 1  # record number of short
         elif action == 1:  # vice versa for short trade
@@ -111,25 +107,25 @@ class OhlcvEnv(gym.Env):
                 self.action = 1
                 self.exit_price = self.closingPrice
                 self.reward += ((self.exit_price - self.entry_price) / self.entry_price + 1) * (1 - self.fee) ** 2 - 1
-                self.krw_balance = self.krw_balance * (1.0 + self.reward)
+                self.usdt_balance = self.usdt_balance * (1.0 + self.reward)
                 self.entry_price = 0
                 self.n_long += 1
 
         # [coin + krw_won] total value evaluated in krw won
         if (self.position == LONG):
             temp_reward = ((self.closingPrice - self.entry_price) / self.entry_price + 1) * (1 - self.fee) ** 2 - 1
-            new_portfolio = self.krw_balance * (1.0 + temp_reward)
+            new_portfolio = self.usdt_balance * (1.0 + temp_reward)
         elif (self.position == SHORT):
             temp_reward = ((self.entry_price - self.closingPrice) / self.closingPrice + 1) * (1 - self.fee) ** 2 - 1
-            new_portfolio = self.krw_balance * (1.0 + temp_reward)
+            new_portfolio = self.usdt_balance * (1.0 + temp_reward)
         else:
             temp_reward = 0
-            new_portfolio = self.krw_balance
+            new_portfolio = self.usdt_balance
 
         self.portfolio = new_portfolio
         self.current_tick += 1
         if (self.show_trade and self.current_tick % 100 == 0):
-            print("Tick: {0}/ Portfolio (krw-won): {1}".format(self.current_tick, self.portfolio))
+            print("Tick: {0}/ Portfolio (usdt): {1}".format(self.current_tick, self.portfolio))
             print("Long: {0}/ Short: {1}".format(self.n_long, self.n_short))
         self.history.append((self.action, self.current_tick, self.closingPrice, self.portfolio, self.reward))
         self.updateState()
@@ -160,8 +156,8 @@ class OhlcvEnv(gym.Env):
 
         # clear internal variables
         self.history = []  # keep buy, sell, hold action history
-        self.krw_balance = 100 * 10000  # initial balance, u can change it to whatever u like
-        self.portfolio = float(self.krw_balance)  # (coin * current_price + current_krw_balance) == portfolio
+        self.usdt_balance = 100 * 10000  # initial balance, u can change it to whatever u like
+        self.portfolio = float(self.usdt_balance)  # (coin * current_price + current_usdt_balance) == portfolio
         self.profit = 0
 
         self.action = HOLD
