@@ -1,8 +1,7 @@
 import numpy as np
-
 # import keras
 from keras.models import Sequential
-from keras.layers import Dense, Activation, Flatten, CuDNNLSTM, Dropout, Bidirectional, LSTM
+from keras.layers import Dense, Activation, Flatten, CuDNNLSTM, Dropout
 from keras.optimizers import Adam
 
 # keras-rl agent
@@ -25,23 +24,12 @@ def create_model(shape, nb_actions):
     model.add(Activation('relu'))
     model.add(Dense(nb_actions, activation='linear'))
     return model
-    #
-    # model = Sequential()
-    # model.add(Bidirectional(LSTM(256, return_sequences=True), input_shape=(train_X.shape[1], train_X.shape[2])))
-    # model.add(Bidirectional(LSTM(256)))
-    # model.add(Dense(256))  # 输出的变量数
-    # model.add(Dense(2))  # 输出的变量数
-    # model.add(Activation('relu'))
-    # adam = optimizers.Adam(lr=0.0001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.00002)
-    # model.compile(loss='mse', optimizer=adam)
-    #
-    # history = model.fit(train_X, train_y, epochs=250, batch_size=10000, validation_data=(test_X, test_y))
 
 
 def main():
     # OPTIONS
     ENV_NAME = 'OHLCV-v0'
-    TIME_STEP = 30
+    TIME_STEP = 100
 
     # Get the environment and extract the number of actions.
     PATH_TRAIN = "./data/train/"
@@ -58,7 +46,7 @@ def main():
     print(model.summary())
 
     # Finally, we configure and compile our agent. You can use every built-in Keras optimizer and even the metrics!
-    memory = SequentialMemory(limit=5000, window_length=TIME_STEP)
+    memory = SequentialMemory(limit=100000, window_length=TIME_STEP)
     # policy = BoltzmannQPolicy()
     policy = EpsGreedyQPolicy()
     # enable the dueling network
@@ -71,9 +59,7 @@ def main():
     while True:
         # train
         dqn.fit(env, nb_steps=5500, nb_max_episode_steps=10000, visualize=False, verbose=2)
-        print('train finished once!')
         try:
-            pass
             # validate
             info = dqn.test(env_test, nb_episodes=1, visualize=False)
             n_long, n_short, total_reward, portfolio = info['n_trades']['long'], info['n_trades']['short'], info[

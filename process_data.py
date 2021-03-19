@@ -42,8 +42,6 @@ class FeatureExtractor:
 
     # note! this is not a complete list
     # additional indicator can help in some scenario but usually acts as a noise
-    # 注意！ 这不是一个完整的列表
-    # 其他指标可以在某些情况下提供帮助，但通常会产生噪声
     def add_ta_features(self):
         obv = talib.OBV(self.close, self.volume)
         obv_mv_avg = talib.MA(obv, timeperiod=10)
@@ -67,7 +65,7 @@ class FeatureExtractor:
         self.df['macd'] = macd
         self.df['signal'] = macdsignal
 
-        # additional info
+        # addtional info
         self.df['adx'] = talib.ADX(self.high, self.low, self.close, timeperiod=14)
         self.df['cci'] = talib.CCI(self.high, self.low, self.close, timeperiod=14)
 
@@ -86,7 +84,7 @@ class FeatureExtractor:
 
         # TRIX
         self.df['trix'] = talib.TRIX(self.close, timeperiod=5)
-        self.df['trix_signal'] = talib.SMA(self.df['trix'], timeperiod=3)
+        self.df['trix_signal'] = talib.EMA(self.df['trix'], timeperiod=3)
         self.df['trix_hist'] = self.df['trix'] - self.df['trix_signal']
 
         # MFI
