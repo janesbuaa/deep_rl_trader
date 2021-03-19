@@ -29,7 +29,7 @@ def create_model(shape, nb_actions):
 def main():
     # OPTIONS
     ENV_NAME = 'OHLCV-v0'
-    TIME_STEP = 30
+    TIME_STEP = 100
 
     # Get the environment and extract the number of actions.
     PATH_TRAIN = "./data/train/"
