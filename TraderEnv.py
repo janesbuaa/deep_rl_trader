@@ -1,11 +1,11 @@
 import process_data
 import pandas as pd
-import random
+import numpy as np
 import gym
 from gym import spaces
 from gym.utils import seeding
-import numpy as np
 from pathlib import Path
+from timethis import timethis
 
 # position constant
 LONG = 0
@@ -24,7 +24,7 @@ class OhlcvEnv(gym.Env):
         self.show_trade = show_trade
         self.path = path
         self.actions = ["LONG", "SHORT", "FLAT"]
-        self.fee = 0.0005
+        self.fee = np.float32(0.001)
         self.seed()
         self.file_list = []
         # load_csv
@@ -63,10 +63,10 @@ class OhlcvEnv(gym.Env):
 
     def seed(self, seed=None):
         self.np_random, seed = seeding.np_random(seed)
-        return [seed]
+        return [np.float32(seed)]
 
+    # @timethis
     def step(self, action):
-
         if self.done:
             return self.state, self.reward, self.done, {}
         self.reward = 0
@@ -85,48 +85,47 @@ class OhlcvEnv(gym.Env):
                 self.position = LONG  # update position to long
                 self.action = BUY  # record action as buy
                 self.entry_price = self.closingPrice  # maintain entry price
+                self.n_long += 1  # record number of long
             elif self.position == SHORT:  # if previous position was short
                 self.position = FLAT  # update position to flat
                 self.action = BUY  # record action as buy
-                self.exit_price = self.closingPrice
                 # calculate reward
-                self.reward += ((self.entry_price - self.exit_price) / self.exit_price + 1) * (1 - self.fee) ** 2 - 1
-                self.krw_balance = self.krw_balance * (1.0 + self.reward)  # evaluate cumulative return in krw-won
+                self.reward = np.float32(self.entry_price / self.closingPrice * (1 - self.fee) ** 2 - 1)
+                self.usdt_balance += np.float32(self.usdt_balance * self.reward)
                 self.entry_price = 0  # clear entry price
-                self.n_short += 1  # record number of short
         elif action == SELL:  # vice versa for short trade
             if self.position == FLAT:
                 self.position = SHORT
                 self.action = SELL
                 self.entry_price = self.closingPrice
+                self.n_short += 1
             elif self.position == LONG:
                 self.position = FLAT
                 self.action = SELL
-                self.exit_price = self.closingPrice
-                self.reward += ((self.exit_price - self.entry_price) / self.entry_price + 1) * (1 - self.fee) ** 2 - 1
-                self.krw_balance = self.krw_balance * (1.0 + self.reward)
+                self.reward = np.float32(self.closingPrice / self.entry_price * (1 - self.fee) ** 2 - 1)
+                self.usdt_balance += np.float32(self.usdt_balance * self.reward)
                 self.entry_price = 0
-                self.n_long += 1
 
-        # [coin + krw_won] total value evaluated in krw won
+        # [coin + usdt] total value evaluated in usdt
         if self.position == LONG:
             temp_reward = ((self.closingPrice - self.entry_price) / self.entry_price + 1) * (1 - self.fee) ** 2 - 1
-            new_portfolio = self.krw_balance * (1.0 + temp_reward)
+            new_portfolio = self.usdt_balance * (1.0 + temp_reward)
         elif self.position == SHORT:
             temp_reward = ((self.entry_price - self.closingPrice) / self.closingPrice + 1) * (1 - self.fee) ** 2 - 1
-            new_portfolio = self.krw_balance * (1.0 + temp_reward)
+            new_portfolio = self.usdt_balance * (1.0 + temp_reward)
         else:
             temp_reward = 0
-            new_portfolio = self.krw_balance
+            new_portfolio = self.usdt_balance
 
-        self.portfolio = new_portfolio
+        # 投资组合
+        self.portfolio = np.float32(new_portfolio)
         self.current_tick += 1
         if self.show_trade and self.current_tick % 100 == 0:
-            print("Tick: {0}/ Portfolio (krw-won): {1}".format(self.current_tick, self.portfolio))
+            print("Tick: {0}/ Portfolio (usdt): {1}".format(self.current_tick, self.portfolio))
             print("Long: {0}/ Short: {1}".format(self.n_long, self.n_short))
         self.history.append((self.action, self.current_tick, self.closingPrice, self.portfolio, self.reward))
         self.updateState()
-        if self.current_tick > (self.df.shape[0]) - self.window_size - 1:
+        if self.current_tick > self.df.shape[0] - self.window_size - 1:
             self.done = True
             self.reward = self.get_profit()  # return reward at end of the game
         return self.state, self.reward, self.done, {'portfolio': np.array([self.portfolio]),
@@ -135,12 +134,12 @@ class OhlcvEnv(gym.Env):
 
     def get_profit(self):
         if self.position == LONG:
-            profit = ((self.closingPrice - self.entry_price) / self.entry_price + 1) * (1 - self.fee) ** 2 - 1
+            profit = self.closingPrice / self.entry_price * (1 - self.fee) ** 2 - 1
         elif self.position == SHORT:
-            profit = ((self.entry_price - self.closingPrice) / self.closingPrice + 1) * (1 - self.fee) ** 2 - 1
+            profit = self.entry_price / self.closingPrice * (1 - self.fee) ** 2 - 1
         else:
             profit = 0
-        return profit
+        return np.float32(profit)
 
     def reset(self):
         # self.current_tick = random.randint(0, self.df.shape[0]-1000)
@@ -153,8 +152,8 @@ class OhlcvEnv(gym.Env):
 
         # clear internal variables
         self.history = []  # keep buy, sell, hold action history
-        self.krw_balance = 100 * 10000  # initial balance, u can change it to whatever u like
-        self.portfolio = float(self.krw_balance)  # (coin * current_price + current_krw_balance) == portfolio
+        self.usdt_balance = 100 * 10000  # initial balance, u can change it to whatever u like
+        self.portfolio = np.float32(self.usdt_balance)  # (coin * current_price + current_usdt_balance) == portfolio
         self.profit = 0
 
         self.action = HOLD
@@ -169,10 +168,10 @@ class OhlcvEnv(gym.Env):
         def one_hot_encode(x, n_classes):
             return np.eye(n_classes)[x]
 
-        self.closingPrice = float(self.closingPrices[self.current_tick])
+        self.closingPrice = np.float32(self.closingPrices[self.current_tick])
         prev_position = self.position
         one_hot_position = one_hot_encode(prev_position, 3)
         profit = self.get_profit()
         # append two
-        self.state = np.concatenate((self.df[self.current_tick], one_hot_position, [profit]))
+        self.state = np.float32(np.concatenate((self.df[self.current_tick], one_hot_position, [profit])))
         return self.state

@@ -18,7 +18,6 @@ from util import NormalizerProcessor
 def create_model(shape, nb_actions):
     model = Sequential()
     model.add(CuDNNLSTM(64, input_shape=shape, return_sequences=True))
-    model.add(Dropout(0.3))
     model.add(CuDNNLSTM(64))
     model.add(Dense(32))
     model.add(Activation('relu'))
@@ -43,7 +42,7 @@ def main():
 
     nb_actions = env.action_space.n
     model = create_model(shape=env.shape, nb_actions=nb_actions)
-    print(model.summary())
+    # print(model.summary())
 
     # Finally, we configure and compile our agent. You can use every built-in Keras optimizer and even the metrics!
     memory = SequentialMemory(limit=100000, window_length=TIME_STEP)
@@ -51,8 +50,8 @@ def main():
     policy = EpsGreedyQPolicy()
     # enable the dueling network
     # you can specify the dueling_type to one of {'avg','max','naive'}
-    dqn = DQNAgent(model=model, nb_actions=nb_actions, memory=memory, batch_size=32, nb_steps_warmup=200,
-                   enable_dueling_network=True, dueling_type='avg', target_model_update=1e-2, policy=policy,
+    dqn = DQNAgent(model=model, nb_actions=nb_actions, memory=memory, batch_size=64, nb_steps_warmup=200,
+                   enable_dueling_network=True, dueling_type='avg', target_model_update=100, policy=policy,
                    processor=NormalizerProcessor())
     dqn.compile(Adam(lr=1e-3), metrics=['mae'])
 
