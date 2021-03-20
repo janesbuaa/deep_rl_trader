@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="465f5086-e663-4d54-97a4-79214727de57" name="Default Changelist" comment="完善版本1.0">
+    <list default="true" id="465f5086-e663-4d54-97a4-79214727de57" name="Default Changelist" comment="增加dropout1.0">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraderEnv.py" beforeDir="false" afterPath="$PROJECT_DIR$/TraderEnv.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ddqn_rl_trader.py" beforeDir="false" afterPath="$PROJECT_DIR$/ddqn_rl_trader.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -68,7 +69,7 @@
       <workItem from="1616121000634" duration="2162000" />
       <workItem from="1616123318032" duration="3001000" />
       <workItem from="1616130892534" duration="501000" />
-      <workItem from="1616131505627" duration="35072000" />
+      <workItem from="1616131505627" duration="37473000" />
     </task>
     <task id="LOCAL-00001" summary="return back">
       <created>1616130347108</created>
@@ -91,7 +92,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616227403077</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="增加dropout1.0">
+      <created>1616240400245</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1616240400245</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -112,7 +120,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="return back" />
     <MESSAGE value="完善版本1.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="完善版本1.0" />
+    <MESSAGE value="增加dropout1.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加dropout1.0" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -126,6 +135,6 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/deep_rl_trader$ddqn_rl_trader.coverage" NAME="ddqn_rl_trader Coverage Results" MODIFIED="1616213343345" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/deep_rl_trader$ddqn_rl_trader.coverage" NAME="ddqn_rl_trader Coverage Results" MODIFIED="1616240714627" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

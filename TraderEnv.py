@@ -108,13 +108,10 @@ class OhlcvEnv(gym.Env):
 
         # [coin + usdt] total value evaluated in usdt
         if self.position == LONG:
-            temp_reward = ((self.closingPrice - self.entry_price) / self.entry_price + 1) * (1 - self.fee) ** 2 - 1
-            new_portfolio = self.usdt_balance * (1.0 + temp_reward)
+            new_portfolio = self.usdt_balance * self.closingPrice / self.entry_price * (1 - self.fee) ** 2
         elif self.position == SHORT:
-            temp_reward = ((self.entry_price - self.closingPrice) / self.closingPrice + 1) * (1 - self.fee) ** 2 - 1
-            new_portfolio = self.usdt_balance * (1.0 + temp_reward)
+            new_portfolio = self.usdt_balance * self.entry_price / self.closingPrice * (1 - self.fee) ** 2
         else:
-            temp_reward = 0
             new_portfolio = self.usdt_balance
 
         # 投资组合
