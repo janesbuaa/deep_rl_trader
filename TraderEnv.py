@@ -24,7 +24,7 @@ class OhlcvEnv(gym.Env):
         self.show_trade = show_trade
         self.path = path
         self.actions = ["LONG", "SHORT", "FLAT"]
-        self.fee = 0.001
+        self.fee = (1 - 0.002) ** 2
         self.seed()
         self.file_list = []
         # load_csv
@@ -55,7 +55,7 @@ class OhlcvEnv(gym.Env):
         self.df.dropna(inplace=True)  # drops Nan rows
         self.df['closingPrices'] = self.df['close']
         self.df = self.df.iloc[:, col:]
-        self.closingPrices = self.df['close'].values
+        self.closingPrices = self.df['closingPrices'].values
         self.df = self.df.values
 
     def render(self, mode='human', verbose=False):
@@ -90,7 +90,7 @@ class OhlcvEnv(gym.Env):
                 self.position = FLAT  # update position to flat
                 self.action = BUY  # record action as buy
                 # calculate reward
-                self.reward = self.entry_price / self.closingPrice * (1 - self.fee) ** 2 - 1
+                self.reward = self.entry_price / self.closingPrice * self.fee - 1
                 self.usdt_balance *= 1 + self.reward
                 self.entry_price = 0  # clear entry price
         elif action == SELL:  # vice versa for short trade
@@ -102,15 +102,15 @@ class OhlcvEnv(gym.Env):
             elif self.position == LONG:
                 self.position = FLAT
                 self.action = SELL
-                self.reward = self.closingPrice / self.entry_price * (1 - self.fee) ** 2 - 1
+                self.reward = self.closingPrice / self.entry_price * self.fee - 1
                 self.usdt_balance *= 1 + self.reward
                 self.entry_price = 0
 
         # [coin + usdt] total value evaluated in usdt
         if self.position == LONG:
-            new_portfolio = self.usdt_balance * self.closingPrice / self.entry_price * (1 - self.fee) ** 2
+            new_portfolio = self.usdt_balance * self.closingPrice / self.entry_price * self.fee
         elif self.position == SHORT:
-            new_portfolio = self.usdt_balance * self.entry_price / self.closingPrice * (1 - self.fee) ** 2
+            new_portfolio = self.usdt_balance * self.entry_price / self.closingPrice * self.fee
         else:
             new_portfolio = self.usdt_balance
 
@@ -131,9 +131,9 @@ class OhlcvEnv(gym.Env):
 
     def get_profit(self):
         if self.position == LONG:
-            return self.closingPrice / self.entry_price * (1 - self.fee) ** 2 - 1
+            return self.closingPrice / self.entry_price * self.fee - 1
         elif self.position == SHORT:
-            return self.entry_price / self.closingPrice * (1 - self.fee) ** 2 - 1
+            return self.entry_price / self.closingPrice * self.fee - 1
         else:
             return 0
 
@@ -148,7 +148,7 @@ class OhlcvEnv(gym.Env):
 
         # clear internal variables
         self.history = []  # keep buy, sell, hold action history
-        self.usdt_balance = 100 * 10000  # initial balance, u can change it to whatever u like
+        self.usdt_balance = 10 * 10000  # initial balance, u can change it to whatever u like
         self.portfolio = self.usdt_balance  # (coin * current_price + current_usdt_balance) == portfolio
         self.profit = 0
 

@@ -18,10 +18,10 @@ from util import NormalizerProcessor
 def create_model(shape, nb_actions):
     model = Sequential()
     model.add(CuDNNLSTM(96, input_shape=shape, return_sequences=True))
-    model.add(Dropout(0.3))
+    model.add(Dropout(0.4))
     model.add(CuDNNLSTM(96))
-    model.add(Dropout(0.3))
-    model.add(Dense(48))
+    model.add(Dropout(0.4))
+    model.add(Dense(32))
     model.add(Activation('relu'))
     model.add(Dense(nb_actions, activation='linear'))
     return model
@@ -30,7 +30,7 @@ def create_model(shape, nb_actions):
 def main():
     # OPTIONS
     ENV_NAME = 'OHLCV-v0'
-    TIME_STEP = 100
+    TIME_STEP = 50
 
     # Get the environment and extract the number of actions.
     PATH_TRAIN = "./data/train/"
@@ -52,8 +52,8 @@ def main():
     policy = EpsGreedyQPolicy()
     # enable the dueling network
     # you can specify the dueling_type to one of {'avg','max','naive'}
-    dqn = DQNAgent(model=model, nb_actions=nb_actions, memory=memory, batch_size=64, nb_steps_warmup=200,
-                   enable_dueling_network=True, dueling_type='avg', target_model_update=100, policy=policy,
+    dqn = DQNAgent(model=model, nb_actions=nb_actions, memory=memory, batch_size=32, nb_steps_warmup=200,
+                   enable_dueling_network=True, dueling_type='avg', target_model_update=300, policy=policy,
                    processor=NormalizerProcessor())
     dqn.compile(Adam(lr=1e-3), metrics=['mae'])
 
