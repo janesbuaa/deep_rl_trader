@@ -24,7 +24,7 @@ class OhlcvEnv(gym.Env):
         self.show_trade = show_trade
         self.path = path
         self.actions = ["LONG", "SHORT", "FLAT"]
-        self.fee = np.float32(0.001)
+        self.fee = 0.001
         self.seed()
         self.file_list = []
         # load_csv
@@ -54,8 +54,8 @@ class OhlcvEnv(gym.Env):
 
         self.df.dropna(inplace=True)  # drops Nan rows
         self.df['closingPrices'] = self.df['close']
-        self.df = self.df.iloc[:, col:].astype(np.float32)
-        self.closingPrices = self.df['closingPrices'].values
+        self.df = self.df.iloc[:, col:]
+        self.closingPrices = self.df['close'].values
         self.df = self.df.values
 
     def render(self, mode='human', verbose=False):
@@ -63,7 +63,7 @@ class OhlcvEnv(gym.Env):
 
     def seed(self, seed=None):
         self.np_random, seed = seeding.np_random(seed)
-        return [np.float32(seed)]
+        return [seed]
 
     # @timethis
     def step(self, action):
@@ -90,7 +90,7 @@ class OhlcvEnv(gym.Env):
                 self.position = FLAT  # update position to flat
                 self.action = BUY  # record action as buy
                 # calculate reward
-                self.reward = np.float32(self.entry_price / self.closingPrice * (1 - self.fee) ** 2 - 1)
+                self.reward = self.entry_price / self.closingPrice * (1 - self.fee) ** 2 - 1
                 self.usdt_balance *= 1 + self.reward
                 self.entry_price = 0  # clear entry price
         elif action == SELL:  # vice versa for short trade
@@ -102,7 +102,7 @@ class OhlcvEnv(gym.Env):
             elif self.position == LONG:
                 self.position = FLAT
                 self.action = SELL
-                self.reward = np.float32(self.closingPrice / self.entry_price * (1 - self.fee) ** 2 - 1)
+                self.reward = self.closingPrice / self.entry_price * (1 - self.fee) ** 2 - 1
                 self.usdt_balance *= 1 + self.reward
                 self.entry_price = 0
 
@@ -115,7 +115,7 @@ class OhlcvEnv(gym.Env):
             new_portfolio = self.usdt_balance
 
         # 投资组合
-        self.portfolio = np.float32(new_portfolio)
+        self.portfolio = new_portfolio
         self.current_tick += 1
         if self.show_trade and self.current_tick % 100 == 0:
             print("Tick: {0}/ Portfolio (usdt): {1}".format(self.current_tick, self.portfolio))
@@ -131,12 +131,11 @@ class OhlcvEnv(gym.Env):
 
     def get_profit(self):
         if self.position == LONG:
-            profit = self.closingPrice / self.entry_price * (1 - self.fee) ** 2 - 1
+            return self.closingPrice / self.entry_price * (1 - self.fee) ** 2 - 1
         elif self.position == SHORT:
-            profit = self.entry_price / self.closingPrice * (1 - self.fee) ** 2 - 1
+            return self.entry_price / self.closingPrice * (1 - self.fee) ** 2 - 1
         else:
-            profit = 0
-        return np.float32(profit)
+            return 0
 
     def reset(self):
         # self.current_tick = random.randint(0, self.df.shape[0]-1000)
@@ -150,7 +149,7 @@ class OhlcvEnv(gym.Env):
         # clear internal variables
         self.history = []  # keep buy, sell, hold action history
         self.usdt_balance = 100 * 10000  # initial balance, u can change it to whatever u like
-        self.portfolio = np.float32(self.usdt_balance)  # (coin * current_price + current_usdt_balance) == portfolio
+        self.portfolio = self.usdt_balance  # (coin * current_price + current_usdt_balance) == portfolio
         self.profit = 0
 
         self.action = HOLD
@@ -165,10 +164,10 @@ class OhlcvEnv(gym.Env):
         def one_hot_encode(x, n_classes):
             return np.eye(n_classes)[x]
 
-        self.closingPrice = np.float32(self.closingPrices[self.current_tick])
+        self.closingPrice = self.closingPrices[self.current_tick]
         prev_position = self.position
         one_hot_position = one_hot_encode(prev_position, 3)
         profit = self.get_profit()
         # append two
-        self.state = np.float32(np.concatenate((self.df[self.current_tick], one_hot_position, [profit])))
+        self.state = np.concatenate((self.df[self.current_tick], one_hot_position, [profit]))
         return self.state
