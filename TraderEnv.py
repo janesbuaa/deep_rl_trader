@@ -91,7 +91,7 @@ class OhlcvEnv(gym.Env):
                 self.action = BUY  # record action as buy
                 # calculate reward
                 self.reward = np.float32(self.entry_price / self.closingPrice * (1 - self.fee) ** 2 - 1)
-                self.usdt_balance += np.float32(self.usdt_balance * self.reward)
+                self.usdt_balance *= 1 + self.reward
                 self.entry_price = 0  # clear entry price
         elif action == SELL:  # vice versa for short trade
             if self.position == FLAT:
@@ -103,7 +103,7 @@ class OhlcvEnv(gym.Env):
                 self.position = FLAT
                 self.action = SELL
                 self.reward = np.float32(self.closingPrice / self.entry_price * (1 - self.fee) ** 2 - 1)
-                self.usdt_balance += np.float32(self.usdt_balance * self.reward)
+                self.usdt_balance *= 1 + self.reward
                 self.entry_price = 0
 
         # [coin + usdt] total value evaluated in usdt

@@ -17,13 +17,11 @@ from util import NormalizerProcessor
 
 def create_model(shape, nb_actions):
     model = Sequential()
-    # model.add(Dropout(0.3))
     model.add(CuDNNLSTM(96, input_shape=shape, return_sequences=True))
     model.add(Dropout(0.3))
     model.add(CuDNNLSTM(96))
     model.add(Dropout(0.3))
     model.add(Dense(48))
-    model.add(Dropout(0.3))
     model.add(Activation('relu'))
     model.add(Dense(nb_actions, activation='linear'))
     return model
