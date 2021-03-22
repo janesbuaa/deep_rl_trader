@@ -26,6 +26,7 @@ class OhlcvEnv(gym.Env):
         self.actions = ["LONG", "SHORT", "FLAT"]
         self.fee = (1 - 0.002) ** 2
         self.maxdrawdown = 3/100.
+        self.reward = 0
         self.seed()
         self.file_list = []
         # load_csv
@@ -118,7 +119,7 @@ class OhlcvEnv(gym.Env):
 
         # 投资组合
         self.portfolio = new_portfolio
-        if self.show_trade and self.current_tick % 100 == 0:
+        if self.show_trade and self.current_tick % 1000 == 0:
             print("Tick: {0}/ Portfolio (usdt): {1}".format(self.current_tick, self.portfolio))
             print("Long: {0}/ Short: {1}".format(self.n_long, self.n_short))
         self.history.append((self.action, self.current_tick, self.closingPrice, self.portfolio, self.reward))
@@ -133,26 +134,29 @@ class OhlcvEnv(gym.Env):
 
     def get_reward(self):
         drawdowns = []
-        array = np.array([1])
+        array = []
         # s[i:j] 表示获取a[i]到a[j-1]
         if self.position == LONG:
             array = self.closingPrices[self.entry_tick:(self.current_tick+1)]
         elif self.position == SHORT:
             array = self.closingPrices[self.current_tick::-1] if self.entry_tick-1 < 0 else self.closingPrices[self.current_tick:(self.entry_tick - 1):-1]
-        max_so_far = array[0]
-        for i in range(len(array)):
-            if array[i] > max_so_far:
-                drawdown = 0
-                drawdowns.append(drawdown/max_so_far)
-                max_so_far = array[i]
-            else:
-                drawdown = max_so_far - array[i]
-                drawdowns.append(drawdown/max_so_far)
-        maxdrawdown = max(max(drawdowns), self.maxdrawdown)
-        profit = array[-1] / array[0] * (1. if self.position == FLAT else self.fee)
-        usdt_balance = self.usdt_balance * profit
-        reward = (profit - 1) / (1. if self.position == FLAT else maxdrawdown)
-        return usdt_balance, reward
+        if len(array):
+            max_so_far = array[0]
+            for i in range(len(array)):
+                if array[i] > max_so_far:
+                    drawdown = 0
+                    drawdowns.append(drawdown/max_so_far)
+                    max_so_far = array[i]
+                else:
+                    drawdown = max_so_far - array[i]
+                    drawdowns.append(drawdown/max_so_far)
+            maxdrawdown = max(max(drawdowns), self.maxdrawdown)
+            profit = array[-1] / array[0] * self.fee
+            usdt_balance = self.usdt_balance * profit
+            reward = (profit - 1) / maxdrawdown
+            return usdt_balance, reward
+        else:
+            return self.usdt_balance, 0
 
     def reset(self):
         # self.current_tick = random.randint(0, self.df.shape[0]-1000)
