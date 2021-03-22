@@ -25,6 +25,7 @@ class OhlcvEnv(gym.Env):
         self.path = path
         self.actions = ["LONG", "SHORT", "FLAT"]
         self.fee = (1 - 0.002) ** 2
+        self.maxdrawdown = 3/100.
         self.seed()
         self.file_list = []
         # load_csv
@@ -85,26 +86,27 @@ class OhlcvEnv(gym.Env):
                 self.position = LONG  # update position to long
                 self.action = BUY  # record action as buy
                 self.entry_price = self.closingPrice  # maintain entry price
+                self.entry_tick = self.current_tick  # maintain entry tick
                 self.n_long += 1  # record number of long
             elif self.position == SHORT:  # if previous position was short
+                self.usdt_balance, self.reward = self.get_reward()
                 self.position = FLAT  # update position to flat
                 self.action = BUY  # record action as buy
-                # calculate reward
-                self.reward = self.entry_price / self.closingPrice * self.fee - 1
-                self.usdt_balance *= 1 + self.reward
                 self.entry_price = 0  # clear entry price
+                self.entry_tick = 0
         elif action == SELL:  # vice versa for short trade
             if self.position == FLAT:
                 self.position = SHORT
                 self.action = SELL
                 self.entry_price = self.closingPrice
+                self.entry_tick = self.current_tick
                 self.n_short += 1
             elif self.position == LONG:
+                self.usdt_balance, self.reward = self.get_reward()
                 self.position = FLAT
                 self.action = SELL
-                self.reward = self.closingPrice / self.entry_price * self.fee - 1
-                self.usdt_balance *= 1 + self.reward
                 self.entry_price = 0
+                self.entry_tick = 0
 
         # [coin + usdt] total value evaluated in usdt
         if self.position == LONG:
@@ -116,26 +118,41 @@ class OhlcvEnv(gym.Env):
 
         # 投资组合
         self.portfolio = new_portfolio
-        self.current_tick += 1
         if self.show_trade and self.current_tick % 100 == 0:
             print("Tick: {0}/ Portfolio (usdt): {1}".format(self.current_tick, self.portfolio))
             print("Long: {0}/ Short: {1}".format(self.n_long, self.n_short))
         self.history.append((self.action, self.current_tick, self.closingPrice, self.portfolio, self.reward))
+        self.current_tick += 1
         self.updateState()
         if self.current_tick > self.df.shape[0] - self.window_size - 1:
             self.done = True
-            self.reward = self.get_profit()  # return reward at end of the game
+            self.usdt_balance, self.reward = self.get_reward()  # return reward at end of the game
         return self.state, self.reward, self.done, {'portfolio': np.array([self.portfolio]),
                                                     "history": self.history,
                                                     "n_trades": {'long': self.n_long, 'short': self.n_short}}
 
-    def get_profit(self):
+    def get_reward(self):
+        drawdowns = []
+        array = np.array([1])
+        # s[i:j] 表示获取a[i]到a[j-1]
         if self.position == LONG:
-            return self.closingPrice / self.entry_price * self.fee - 1
+            array = self.closingPrices[self.entry_tick:(self.current_tick+1)]
         elif self.position == SHORT:
-            return self.entry_price / self.closingPrice * self.fee - 1
-        else:
-            return 0
+            array = self.closingPrices[self.current_tick::-1] if self.entry_tick-1 < 0 else self.closingPrices[self.current_tick:(self.entry_tick - 1):-1]
+        max_so_far = array[0]
+        for i in range(len(array)):
+            if array[i] > max_so_far:
+                drawdown = 0
+                drawdowns.append(drawdown/max_so_far)
+                max_so_far = array[i]
+            else:
+                drawdown = max_so_far - array[i]
+                drawdowns.append(drawdown/max_so_far)
+        maxdrawdown = max(max(drawdowns), self.maxdrawdown)
+        profit = array[-1] / array[0] * (1. if self.position == FLAT else self.fee)
+        usdt_balance = self.usdt_balance * profit
+        reward = (profit - 1) / (1. if self.position == FLAT else maxdrawdown)
+        return usdt_balance, reward
 
     def reset(self):
         # self.current_tick = random.randint(0, self.df.shape[0]-1000)
@@ -167,7 +184,7 @@ class OhlcvEnv(gym.Env):
         self.closingPrice = self.closingPrices[self.current_tick]
         prev_position = self.position
         one_hot_position = one_hot_encode(prev_position, 3)
-        profit = self.get_profit()
+        _, profit = self.get_reward()
         # append two
         self.state = np.concatenate((self.df[self.current_tick], one_hot_position, [profit]))
         return self.state
