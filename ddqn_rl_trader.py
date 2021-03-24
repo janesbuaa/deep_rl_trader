@@ -53,7 +53,7 @@ def main():
     # enable the dueling network
     # you can specify the dueling_type to one of {'avg','max','naive'}
     dqn = DQNAgent(model=model, nb_actions=nb_actions, memory=memory, batch_size=64, nb_steps_warmup=200,
-                   enable_dueling_network=True, dueling_type='avg', target_model_update=200, policy=policy,
+                   enable_dueling_network=True, dueling_type='avg', target_model_update=100, policy=policy,
                    processor=NormalizerProcessor())
     dqn.compile(Adam(lr=1e-3), metrics=['mae'])
 
@@ -62,6 +62,7 @@ def main():
         dqn.fit(env, nb_steps=5500, nb_max_episode_steps=10000, visualize=False, verbose=2)
         try:
             # validate
+            # pass
             info = dqn.test(env_test, nb_episodes=1, visualize=False)
             n_long, n_short, total_reward, portfolio = info['n_trades']['long'], info['n_trades']['short'], info[
                 'total_reward'], int(info['portfolio'])
@@ -72,6 +73,7 @@ def main():
                 './model/duel_dqn_{0}_weights_{1}LS_{2}_{3}_{4}.h5f'.format(ENV_NAME, portfolio, n_long, n_short,
                                                                             total_reward), overwrite=True)
         except KeyboardInterrupt:
+            dqn.save_weights('./model/duel_dqn_weights.h5f', overwrite=True)
             continue
 
 
