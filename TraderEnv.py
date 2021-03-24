@@ -54,7 +54,7 @@ class OhlcvEnv(gym.Env):
         self.df = extractor.add_ta_features()
 
         self.df.dropna(inplace=True)  # drops Nan rows
-        self.df = self.df.iloc[:, 4:]
+        self.df = self.df.iloc[:, 4:].apply(lambda x: (x - np.min(x)) / (np.max(x) - np.min(x)) + 1)
         self.closingPrices = self.df['close'].values
         self.df = self.df.values
 
@@ -167,7 +167,7 @@ class OhlcvEnv(gym.Env):
 
         # clear internal variables
         self.history = []  # keep buy, sell, hold action history
-        self.usdt_balance = 10 * 10000  # initial balance, u can change it to whatever u like
+        self.usdt_balance = 100 * 10000  # initial balance, u can change it to whatever u like
         self.portfolio = self.usdt_balance  # (coin * current_price + current_usdt_balance) == portfolio
         self.profit = 0
 
