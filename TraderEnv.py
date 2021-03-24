@@ -55,6 +55,7 @@ class OhlcvEnv(gym.Env):
 
         self.df.dropna(inplace=True)  # drops Nan rows
         self.df = self.df.iloc[:, 4:].apply(lambda x: (x - np.min(x)) / (np.max(x) - np.min(x)) + 1)
+        self.df = self.df.astype('float32')
         self.closingPrices = self.df['close'].values
         self.df = self.df.values
 
@@ -116,7 +117,7 @@ class OhlcvEnv(gym.Env):
             new_portfolio = self.usdt_balance
 
         # 投资组合
-        self.portfolio = new_portfolio
+        self.portfolio = np.float32(new_portfolio)
         if self.show_trade and self.current_tick % 1000 == 0:
             print("Tick: {0}/ Portfolio (usdt): {1}".format(self.current_tick, self.portfolio))
             print("Long: {0}/ Short: {1}".format(self.n_long, self.n_short))
@@ -152,9 +153,9 @@ class OhlcvEnv(gym.Env):
             profit = array[-1] / array[0] * self.fee
             usdt_balance = self.usdt_balance * profit
             reward = (profit - 1) / maxdrawdown
-            return usdt_balance, reward
+            return np.float32(usdt_balance), np.float32(reward)
         else:
-            return self.usdt_balance, 0
+            return np.float32(self.usdt_balance), np.float32(0)
 
     def reset(self):
         # self.current_tick = random.randint(0, self.df.shape[0]-1000)
@@ -167,7 +168,7 @@ class OhlcvEnv(gym.Env):
 
         # clear internal variables
         self.history = []  # keep buy, sell, hold action history
-        self.usdt_balance = 100 * 10000  # initial balance, u can change it to whatever u like
+        self.usdt_balance = np.float32(100 * 10000)  # initial balance, u can change it to whatever u like
         self.portfolio = self.usdt_balance  # (coin * current_price + current_usdt_balance) == portfolio
         self.profit = 0
 
@@ -185,7 +186,7 @@ class OhlcvEnv(gym.Env):
 
         self.closingPrice = self.closingPrices[self.current_tick]
         prev_position = self.position
-        one_hot_position = one_hot_encode(prev_position, 3)
+        one_hot_position = np.float32(one_hot_encode(prev_position, 3))
         _, profit = self.get_reward()
         # append two
         self.state = np.concatenate((self.df[self.current_tick], one_hot_position, [profit]))

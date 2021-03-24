@@ -52,7 +52,7 @@ def main():
     policy = EpsGreedyQPolicy()
     # enable the dueling network
     # you can specify the dueling_type to one of {'avg','max','naive'}
-    dqn = DQNAgent(model=model, nb_actions=nb_actions, memory=memory, batch_size=128, nb_steps_warmup=300,
+    dqn = DQNAgent(model=model, nb_actions=nb_actions, memory=memory, batch_size=256, nb_steps_warmup=400,
                    enable_dueling_network=True, dueling_type='avg', target_model_update=100, policy=policy,
                    processor=None)
     dqn.compile(Adam(lr=2e-3), metrics=['mae'])

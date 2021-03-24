@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="465f5086-e663-4d54-97a4-79214727de57" name="Default Changelist" comment="换币安数据格式">
+    <list default="true" id="465f5086-e663-4d54-97a4-79214727de57" name="Default Changelist" comment="优化运行速度">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TraderEnv.py" beforeDir="false" afterPath="$PROJECT_DIR$/TraderEnv.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ddqn_rl_trader.py" beforeDir="false" afterPath="$PROJECT_DIR$/ddqn_rl_trader.py" afterDir="false" />
@@ -71,7 +71,7 @@
       <workItem from="1616130892534" duration="501000" />
       <workItem from="1616131505627" duration="43033000" />
       <workItem from="1616294525497" duration="16137000" />
-      <workItem from="1616374024006" duration="41402000" />
+      <workItem from="1616374024006" duration="46950000" />
     </task>
     <task id="LOCAL-00001" summary="return back">
       <created>1616130347108</created>
@@ -150,7 +150,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616550107298</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="优化运行速度">
+      <created>1616574089662</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1616574089662</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,7 +187,8 @@
     <MESSAGE value="优化fee" />
     <MESSAGE value="改进奖励结算方式" />
     <MESSAGE value="换币安数据格式" />
-    <option name="LAST_COMMIT_MESSAGE" value="换币安数据格式" />
+    <MESSAGE value="优化运行速度" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化运行速度" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -191,14 +199,14 @@
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$USER_HOME$/anaconda3/envs/py36/Lib/site-packages/rl/agents/dqn.py</url>
-          <line>58</line>
-          <option name="timeStamp" value="16" />
+          <url>file://$USER_HOME$/anaconda3/envs/py36/Lib/site-packages/rl/memory.py</url>
+          <line>171</line>
+          <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/deep_rl_trader$ddqn_rl_trader.coverage" NAME="ddqn_rl_trader Coverage Results" MODIFIED="1616573489623" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/deep_rl_trader$ddqn_rl_trader.coverage" NAME="ddqn_rl_trader Coverage Results" MODIFIED="1616579433344" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
