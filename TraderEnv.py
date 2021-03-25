@@ -5,6 +5,7 @@ import gym
 from gym import spaces
 from gym.utils import seeding
 from pathlib import Path
+from sklearn import preprocessing
 from timethis import timethis
 
 # position constant
@@ -54,10 +55,10 @@ class OhlcvEnv(gym.Env):
         self.df = extractor.add_ta_features()
 
         self.df.dropna(inplace=True)  # drops Nan rows
-        self.df = self.df.iloc[:, 4:].apply(lambda x: (x - np.min(x)) / (np.max(x) - np.min(x)) + 1)
-        self.df = self.df.astype('float32')
+        self.df = self.df.iloc[:, 4:].astype('float32')
         self.closingPrices = self.df['close'].values
-        self.df = self.df.values
+        scaler = preprocessing.StandardScaler().fit(self.df)
+        self.df = scaler.transform(self.df)
 
     def render(self, mode='human', verbose=False):
         return None

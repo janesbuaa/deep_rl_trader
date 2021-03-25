@@ -30,7 +30,8 @@ def create_model(shape, nb_actions):
 def main():
     # OPTIONS
     ENV_NAME = 'OHLCV-v0'
-    TIME_STEP = 100
+    TIME_STEP = 1000
+    BATCH_SIZE = 256
 
     # Get the environment and extract the number of actions.
     PATH_TRAIN = "./data/train/"
@@ -39,8 +40,8 @@ def main():
     env_test = OhlcvEnv(TIME_STEP, path=PATH_TEST)
 
     # random seed
-    np.random.seed(123)
-    env.seed(123)
+    np.random.seed(BATCH_SIZE)
+    env.seed(BATCH_SIZE)
 
     nb_actions = env.action_space.n
     model = create_model(shape=env.shape, nb_actions=nb_actions)
@@ -52,7 +53,7 @@ def main():
     policy = EpsGreedyQPolicy()
     # enable the dueling network
     # you can specify the dueling_type to one of {'avg','max','naive'}
-    dqn = DQNAgent(model=model, nb_actions=nb_actions, memory=memory, batch_size=256, nb_steps_warmup=400,
+    dqn = DQNAgent(model=model, nb_actions=nb_actions, memory=memory, batch_size=BATCH_SIZE, nb_steps_warmup=int(max(TIME_STEP*1.3, 200)),
                    enable_dueling_network=True, dueling_type='avg', target_model_update=100, policy=policy,
                    processor=None)
     dqn.compile(Adam(lr=2e-3), metrics=['mae'])
@@ -60,12 +61,12 @@ def main():
     ite = 0
     while True:
         # train
-        dqn.fit(env, nb_steps=5500, nb_max_episode_steps=10000, visualize=False, verbose=2)
+        dqn.fit(env, nb_steps=10000, nb_max_episode_steps=10000, visualize=False, verbose=2)
         ite += 1
         try:
             # validate
             # pass
-            if ite > 50 and ite % 10 == 0:
+            if ite >= 50 and ite % 10 == 0:
                 info = dqn.test(env_test, nb_episodes=1, visualize=False)
                 n_long, n_short, total_reward, portfolio = info['n_trades']['long'], info['n_trades']['short'], info[
                     'total_reward'], int(info['portfolio'])
@@ -75,8 +76,9 @@ def main():
                 dqn.save_weights(
                     './model/duel_dqn_{0}_weights_{1}LS_{2}_{3}_{4}.h5f'.format(ENV_NAME, portfolio, n_long, n_short,
                                                                                 total_reward), overwrite=True)
+            else:
+                dqn.save_weights('./model/duel_dqn_weights.h5f', overwrite=True)
         except KeyboardInterrupt:
-            dqn.save_weights('./model/duel_dqn_weights.h5f', overwrite=True)
             continue
 
 
