@@ -56,9 +56,9 @@ class OhlcvEnv(gym.Env):
 
         self.df.dropna(inplace=True)  # drops Nan rows
         self.df = self.df.iloc[:, 4:].astype('float32')
-        self.closingPrices = self.df['close'].values
         scaler = preprocessing.StandardScaler().fit(self.df)
         self.df = scaler.transform(self.df)
+        self.closingPrices = self.df[:, 0]
 
     def render(self, mode='human', verbose=False):
         return None

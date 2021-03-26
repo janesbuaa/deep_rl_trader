@@ -1,4 +1,5 @@
 import numpy as np
+import os
 # import keras
 from keras.models import Sequential
 from keras.layers import Dense, Activation, Flatten, CuDNNLSTM, Dropout
@@ -30,13 +31,14 @@ def create_model(shape, nb_actions):
 def main():
     # OPTIONS
     ENV_NAME = 'OHLCV-v0'
-    TIME_STEP = 1000
-    BATCH_SIZE = 250
+    TIME_STEP = 100
+    BATCH_SIZE = 100
     # 1000-250=2.2s,1000-500=4.18s,500-500=2.1s,500-250=1.1s
 
     # Get the environment and extract the number of actions.
     PATH_TRAIN = "./data/train/"
     PATH_TEST = "./data/test/"
+    PATH_MODEL = './model/duel_dqn_weights.h5f'
     env = OhlcvEnv(TIME_STEP, path=PATH_TRAIN)
     env_test = OhlcvEnv(TIME_STEP, path=PATH_TEST)
 
@@ -59,6 +61,8 @@ def main():
                    processor=None)
     dqn.compile(Adam(lr=2e-3), metrics=['mae'])
 
+    if os.path.exists(PATH_MODEL):
+        dqn.load_weights(PATH_MODEL)
     ite = 0
     while True:
         # train
