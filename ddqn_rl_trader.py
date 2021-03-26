@@ -31,7 +31,8 @@ def main():
     # OPTIONS
     ENV_NAME = 'OHLCV-v0'
     TIME_STEP = 1000
-    BATCH_SIZE = 256
+    BATCH_SIZE = 250
+    # 1000-250=2.2s,1000-500=4.18s,500-500=2.1s,500-250=1.1s
 
     # Get the environment and extract the number of actions.
     PATH_TRAIN = "./data/train/"
@@ -53,7 +54,7 @@ def main():
     policy = EpsGreedyQPolicy()
     # enable the dueling network
     # you can specify the dueling_type to one of {'avg','max','naive'}
-    dqn = DQNAgent(model=model, nb_actions=nb_actions, memory=memory, batch_size=BATCH_SIZE, nb_steps_warmup=int(max(TIME_STEP*1.3, 200)),
+    dqn = DQNAgent(model=model, nb_actions=nb_actions, memory=memory, batch_size=BATCH_SIZE, nb_steps_warmup=int(BATCH_SIZE + TIME_STEP),
                    enable_dueling_network=True, dueling_type='avg', target_model_update=100, policy=policy,
                    processor=None)
     dqn.compile(Adam(lr=2e-3), metrics=['mae'])
@@ -61,7 +62,7 @@ def main():
     ite = 0
     while True:
         # train
-        dqn.fit(env, nb_steps=10000, nb_max_episode_steps=10000, visualize=False, verbose=2)
+        dqn.fit(env, nb_steps=6000, nb_max_episode_steps=10000, visualize=False, verbose=2)
         ite += 1
         try:
             # validate
