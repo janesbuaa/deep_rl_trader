@@ -38,7 +38,7 @@ def main():
     # Get the environment and extract the number of actions.
     PATH_TRAIN = "./data/train/"
     PATH_TEST = "./data/test/"
-    PATH_MODEL = './model/duel_dqn_weights.h5f'
+    PATH_MODEL = "./model/duel_dqn_weights.h5f"
     env = OhlcvEnv(TIME_STEP, path=PATH_TRAIN)
     env_test = OhlcvEnv(TIME_STEP, path=PATH_TEST)
 
@@ -63,6 +63,7 @@ def main():
 
     if os.path.exists(PATH_MODEL):
         dqn.load_weights(PATH_MODEL)
+        print('Load weights success!')
     ite = 0
     while True:
         # train

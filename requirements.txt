@@ -63,7 +63,7 @@ graphviz==0.8.1
 greenlet==0.4.11
 grpcio==1.14.1
 gym~=0.18.0
-h5py==2.7.1
+h5py==2.10
 HeapDict==1.0.0
 hgtk==0.1.1
 html5lib==0.9999999
