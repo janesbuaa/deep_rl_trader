@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import warnings
 from copy import deepcopy
-
+from timethis import timethis
 import numpy as np
 from keras.callbacks import History
 
@@ -50,6 +50,7 @@ class Agent(object):
         """
         return {}
 
+    # @timethis
     def fit(self, env, nb_steps, action_repetition=1, callbacks=None, verbose=1,
             visualize=False, nb_max_start_steps=0, start_step_policy=None, log_interval=10000,
             nb_max_episode_steps=None):
@@ -122,12 +123,13 @@ class Agent(object):
         did_abort = False
         try:
             while self.step < nb_steps:
-                if observation is None:  # start of a new episode
+                if observation is None:  # start of a new episode   新剧集的开始
                     callbacks.on_episode_begin(episode)
                     episode_step = np.int16(0)
                     episode_reward = np.float32(0)
 
                     # Obtain the initial observation by resetting the environment.
+                    # 通过重置环境获得初始观察结果。
                     self.reset_states()
                     observation = deepcopy(env.reset())
                     if self.processor is not None:
@@ -136,6 +138,7 @@ class Agent(object):
 
                     # Perform random starts at beginning of episode and do not record them into the experience.
                     # This slightly changes the start position between games.
+                    # 在情节开始时随机位置开始，请勿将其保存到经验中。 这会稍微改变游戏的开始位置。
                     nb_random_start_steps = 0 if nb_max_start_steps == 0 else np.random.randint(nb_max_start_steps)
                     for _ in range(nb_random_start_steps):
                         if start_step_policy is None:
@@ -158,14 +161,16 @@ class Agent(object):
                             break
 
                 # At this point, we expect to be fully initialized.
+                # 到这里，所有初始化已完成。
                 assert episode_reward is not None
                 assert episode_step is not None
                 assert observation is not None
 
-                # Run a single step.
+                # Run a single step.    运行一单步。
                 callbacks.on_step_begin(episode_step)
                 # This is were all of the work happens. We first perceive and compute the action
                 # (forward step) and then use the reward to improve (backward step).
+                # 这是所有工作发生的地方。 我们首先感知并计算动作（前进），然后使用奖励进行改进（前进）。
                 action = self.forward(observation)
                 if self.processor is not None:
                     action = self.processor.process_action(action)
@@ -191,6 +196,7 @@ class Agent(object):
                         break
                 if nb_max_episode_steps and episode_step >= nb_max_episode_steps - 1:
                     # Force a terminal state.
+                    # 强制终止状态。
                     done = True
                 metrics = self.backward(reward, terminal=done)
                 episode_reward += reward
@@ -213,10 +219,13 @@ class Agent(object):
                     # resetting the environment. We need to pass in `terminal=False` here since
                     # the *next* state, that is the state of the newly reset environment, is
                     # always non-terminal by convention.
+                    # 我们处于结束状态，但代理尚未看到它。 因此，我们再执行一次向前-向后调用，并在重置环境之前简单地忽略该动作。
+                    # 我们需要在这里传递“ terminal = False”，因为下一个状态（即新重置的环境的状态）不是结束状态。
                     self.forward(observation)
                     self.backward(0., terminal=False)
 
                     # This episode is finished, report and reset.
+                    # 本集已结束，报告并重置环境。
                     episode_logs = {
                         'episode_reward': episode_reward,
                         'nb_episode_steps': episode_step,
@@ -233,6 +242,7 @@ class Agent(object):
             # We catch keyboard interrupts here so that training can be be safely aborted.
             # This is so common that we've built this right into this function, which ensures that
             # the `on_train_end` method is properly called.
+            # 我们在这里捕获键盘中断，以便可以安全地终止培训。 这很常见，以至于我们已经在此函数中内置了此权限，以确保正确调用on_train_end方法。
             did_abort = True
         callbacks.on_train_end(logs={'did_abort': did_abort})
         self._on_train_end()
