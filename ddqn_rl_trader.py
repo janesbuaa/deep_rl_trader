@@ -43,8 +43,8 @@ def main():
     env_test = OhlcvEnv(TIME_STEP, path=PATH_TEST)
 
     # random seed
-    np.random.seed(BATCH_SIZE)
-    env.seed(BATCH_SIZE)
+    np.random.seed(BATCH_SIZE + TIME_STEP)
+    env.seed(BATCH_SIZE + TIME_STEP)
 
     nb_actions = env.action_space.n
     model = create_model(shape=env.shape, nb_actions=nb_actions)
@@ -72,7 +72,7 @@ def main():
         try:
             # validate
             # pass
-            if ite >= 50 and ite % 10 == 0:
+            if ite >= 40 and ite % 10 == 0:
                 info = dqn.test(env_test, nb_episodes=1, visualize=False)
                 n_long, n_short, total_reward, portfolio = info['n_trades']['long'], info['n_trades']['short'], info[
                     'total_reward'], int(info['portfolio'])
