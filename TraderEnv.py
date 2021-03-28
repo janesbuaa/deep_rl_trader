@@ -25,7 +25,7 @@ class OhlcvEnv(gym.Env):
         self.show_trade = show_trade
         self.path = path
         self.actions = ["LONG", "SHORT", "FLAT"]
-        self.fee = (1 - 0.002) ** 2
+        self.fee = (1 - 0.001) ** 2
         self.maxdrawdown = 3/100.
         self.reward = 0
         self.seed()
