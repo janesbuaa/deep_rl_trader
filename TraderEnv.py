@@ -128,7 +128,7 @@ class OhlcvEnv(gym.Env):
         if self.current_tick > self.df.shape[0] - self.window_size - 1:
             self.done = True
             self.usdt_balance, self.reward = self.get_reward()  # return reward at end of the game
-        return self.state, self.reward, self.done, {'portfolio': np.array([self.portfolio]),
+        return self.state, self.reward, self.done, {'portfolio': np.array([self.portfolio], dtype='float32'),
                                                     "history": self.history,
                                                     "n_trades": {'long': self.n_long, 'short': self.n_short}}
 
@@ -172,6 +172,7 @@ class OhlcvEnv(gym.Env):
         self.usdt_balance = np.float32(100 * 10000)  # initial balance, u can change it to whatever u like
         self.portfolio = self.usdt_balance  # (coin * current_price + current_usdt_balance) == portfolio
         self.profit = 0
+        self.entry_tick = 0
 
         self.action = HOLD
         self.position = FLAT
