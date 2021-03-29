@@ -56,7 +56,7 @@ class OhlcvEnv(gym.Env):
 
         self.df.dropna(inplace=True)  # drops Nan rows
         self.df = self.df.iloc[:, 4:].astype('float32')
-        self.closingPrices = self.df.iloc[:, 0].values
+        self.closingPrices = self.df['close'].values
         scaler = preprocessing.StandardScaler().fit(self.df)
         self.df = scaler.transform(self.df)
 
@@ -143,16 +143,13 @@ class OhlcvEnv(gym.Env):
             max_so_far = array[0]
             for i in range(len(array)):
                 if array[i] > max_so_far:
-                    drawdown = 0
-                    drawdowns.append(drawdown/max_so_far)
+                    drawdowns.append(0./max_so_far)
                     max_so_far = array[i]
                 else:
-                    drawdown = max_so_far - array[i]
-                    drawdowns.append(drawdown/max_so_far)
-            maxdrawdown = max(max(drawdowns), self.maxdrawdown)
+                    drawdowns.append((max_so_far - array[i])/max_so_far)
             profit = array[-1] / array[0] * self.fee
             usdt_balance = self.usdt_balance * profit
-            reward = (profit - 1) / maxdrawdown
+            reward = (profit - 1) / max(max(drawdowns), self.maxdrawdown)
             return np.float32(usdt_balance), np.float32(reward)
         else:
             return np.float32(self.usdt_balance), np.float32(0)
