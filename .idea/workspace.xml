@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="465f5086-e663-4d54-97a4-79214727de57" name="Default Changelist" comment="np.array float32">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="465f5086-e663-4d54-97a4-79214727de57" name="Default Changelist" comment="调参手续费、dropout">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TraderEnv.py" beforeDir="false" afterPath="$PROJECT_DIR$/TraderEnv.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ddqn_rl_trader.py" beforeDir="false" afterPath="$PROJECT_DIR$/ddqn_rl_trader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/to_array.pyx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +109,7 @@
       <workItem from="1616845286306" duration="3105000" />
       <workItem from="1616848958999" duration="7256000" />
       <workItem from="1616862253894" duration="6747000" />
-      <workItem from="1616900915823" duration="21443000" />
+      <workItem from="1616900915823" duration="34464000" />
     </task>
     <task id="LOCAL-00001" summary="return back">
       <created>1616130347108</created>
@@ -260,7 +258,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616900948892</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="调参手续费、dropout">
+      <created>1616943269346</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1616943269346</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -296,7 +301,8 @@
     <MESSAGE value="load weight" />
     <MESSAGE value="memory size" />
     <MESSAGE value="np.array float32" />
-    <option name="LAST_COMMIT_MESSAGE" value="np.array float32" />
+    <MESSAGE value="调参手续费、dropout" />
+    <option name="LAST_COMMIT_MESSAGE" value="调参手续费、dropout" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -306,21 +312,11 @@
           <line>319</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$USER_HOME$/anaconda3/envs/py36/Lib/site-packages/rl/memory.py</url>
-          <line>219</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$USER_HOME$/anaconda3/envs/py36/Lib/site-packages/rl/memory.py</url>
-          <line>228</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/deep_rl_trader$ddqn_rl_trader.coverage" NAME="ddqn_rl_trader Coverage Results" MODIFIED="1616941488108" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/deep_rl_trader$ddqn_rl_trader.coverage" NAME="ddqn_rl_trader Coverage Results" MODIFIED="1616981346999" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/deep_rl_trader$test.coverage" NAME="test Coverage Results" MODIFIED="1616735413571" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

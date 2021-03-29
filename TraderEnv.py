@@ -56,9 +56,9 @@ class OhlcvEnv(gym.Env):
 
         self.df.dropna(inplace=True)  # drops Nan rows
         self.df = self.df.iloc[:, 4:].astype('float32')
+        self.closingPrices = self.df.iloc[:, 0].values
         scaler = preprocessing.StandardScaler().fit(self.df)
         self.df = scaler.transform(self.df)
-        self.closingPrices = self.df[:, 0]
 
     def render(self, mode='human', verbose=False):
         return None
@@ -135,7 +135,6 @@ class OhlcvEnv(gym.Env):
     def get_reward(self):
         drawdowns = []
         array = []
-        # s[i:j] 表示获取a[i]到a[j-1]
         if self.position == LONG:
             array = self.closingPrices[self.entry_tick:(self.current_tick+1)]
         elif self.position == SHORT:
@@ -159,8 +158,8 @@ class OhlcvEnv(gym.Env):
             return np.float32(self.usdt_balance), np.float32(0)
 
     def reset(self):
-        # self.current_tick = random.randint(0, self.df.shape[0]-1000)
-        self.current_tick = 0
+        self.current_tick = np.random.randint(0, self.df.shape[0]-self.window_size)
+        # self.current_tick = 0
         print("start episode ... {0} at {1}".format(self.rand_episode, self.current_tick))
 
         # positions

@@ -51,7 +51,7 @@ def main():
     # print(model.summary())
 
     # Finally, we configure and compile our agent. You can use every built-in Keras optimizer and even the metrics!
-    memory = SequentialMemory(limit=BATCH_SIZE*30, window_length=TIME_STEP)
+    memory = SequentialMemory(limit=50000, window_length=TIME_STEP)
     # policy = BoltzmannQPolicy()
     policy = EpsGreedyQPolicy()
     # enable the dueling network
