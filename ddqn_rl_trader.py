@@ -33,7 +33,7 @@ def main():
     ENV_NAME = 'OHLCV-v0'
     TIME_STEP = 100
     BATCH_SIZE = 100
-    # 1000-250=2.2s,1000-500=4.18s,500-500=2.1s,500-250=1.1s
+    # 1000-100=1s 1000-250=2.2s,1000-500=4.18s,500-500=2.1s,500-250=1.1s
 
     # Get the environment and extract the number of actions.
     PATH_TRAIN = "./data/train/"
@@ -51,7 +51,7 @@ def main():
     # print(model.summary())
 
     # Finally, we configure and compile our agent. You can use every built-in Keras optimizer and even the metrics!
-    memory = SequentialMemory(limit=50000, window_length=TIME_STEP)
+    memory = SequentialMemory(limit=20000, window_length=TIME_STEP)
     # policy = BoltzmannQPolicy()
     policy = EpsGreedyQPolicy()
     # enable the dueling network
@@ -64,14 +64,12 @@ def main():
     if os.path.exists(PATH_MODEL):
         dqn.load_weights(PATH_MODEL)
         print('Load weights success!')
+
     ite = 0
     while True:
-        # train
-        dqn.fit(env, nb_steps=6000, nb_max_episode_steps=10000, visualize=False, verbose=2)
+        dqn.fit(env, nb_steps=10000, nb_max_episode_steps=10000, visualize=False, verbose=2)
         ite += 1
         try:
-            # validate
-            # pass
             if ite >= 40 and ite % 10 == 0:
                 info = dqn.test(env_test, nb_episodes=1, visualize=False)
                 n_long, n_short, total_reward, portfolio = info['n_trades']['long'], info['n_trades']['short'], info[
