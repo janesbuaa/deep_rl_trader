@@ -19,9 +19,9 @@ from util import NormalizerProcessor
 def create_model(shape, nb_actions):
     model = Sequential()
     model.add(CuDNNLSTM(96, input_shape=shape, return_sequences=True))
-    model.add(Dropout(0.3))
+    # model.add(Dropout(0.3))
     model.add(CuDNNLSTM(96))
-    model.add(Dropout(0.3))
+    # model.add(Dropout(0.3))
     model.add(Dense(32))
     model.add(Activation('relu'))
     model.add(Dense(nb_actions, activation='linear'))
@@ -32,7 +32,7 @@ def main():
     # OPTIONS
     ENV_NAME = 'OHLCV-v0'
     TIME_STEP = 100
-    BATCH_SIZE = 100
+    BATCH_SIZE = 50
     # 1000-100=1s 1000-250=2.2s,1000-500=4.18s,500-500=2.1s,500-250=1.1s
 
     # Get the environment and extract the number of actions.
