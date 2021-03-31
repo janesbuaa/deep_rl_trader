@@ -21,8 +21,9 @@ HOLD = 2
 
 class OhlcvEnv(gym.Env):
 
-    def __init__(self, window_size, path, show_trade=True):
+    def __init__(self, window_size, path, show_trade=True, train=True):
         self.show_trade = show_trade
+        self.train = train
         self.path = path
         self.actions = ["LONG", "SHORT", "FLAT"]
         self.fee = (1 - 0.001) ** 2
@@ -155,8 +156,7 @@ class OhlcvEnv(gym.Env):
             return np.float32(self.usdt_balance), np.float32(0)
 
     def reset(self):
-        self.current_tick = np.random.randint(0, self.df.shape[0]-self.window_size)
-        # self.current_tick = 0
+        self.current_tick = np.random.randint(0, self.df.shape[0]-self.window_size) if self.train else 0
         print("start episode ... {0} at {1}".format(self.rand_episode, self.current_tick))
 
         # positions

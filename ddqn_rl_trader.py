@@ -32,7 +32,7 @@ def main():
     # OPTIONS
     ENV_NAME = 'OHLCV-v0'
     TIME_STEP = 100
-    BATCH_SIZE = 50
+    BATCH_SIZE = 100
     # 1000-100=1s 1000-250=2.2s,1000-500=4.18s,500-500=2.1s,500-250=1.1s
 
     # Get the environment and extract the number of actions.
@@ -40,7 +40,7 @@ def main():
     PATH_TEST = "./data/test/"
     PATH_MODEL = "./model/duel_dqn_weights.h5f"
     env = OhlcvEnv(TIME_STEP, path=PATH_TRAIN)
-    env_test = OhlcvEnv(TIME_STEP, path=PATH_TEST)
+    env_test = OhlcvEnv(TIME_STEP, path=PATH_TEST, train=False)
 
     # random seed
     np.random.seed(BATCH_SIZE + TIME_STEP)
@@ -57,7 +57,7 @@ def main():
     # enable the dueling network
     # you can specify the dueling_type to one of {'avg','max','naive'}
     dqn = DQNAgent(model=model, nb_actions=nb_actions, memory=memory, batch_size=BATCH_SIZE, nb_steps_warmup=int(BATCH_SIZE + TIME_STEP),
-                   enable_dueling_network=True, dueling_type='avg', target_model_update=100, policy=policy,
+                   enable_dueling_network=True, dueling_type='avg', target_model_update=100, policy=policy, gamma=.95,
                    processor=None)
     dqn.compile(Adam(lr=2e-3), metrics=['mae'])
 
@@ -67,7 +67,7 @@ def main():
 
     ite = 0
     while True:
-        dqn.fit(env, nb_steps=10000, nb_max_episode_steps=10000, visualize=False, verbose=2)
+        dqn.fit(env, nb_steps=15000, nb_max_episode_steps=15000, visualize=False, verbose=2)
         ite += 1
         try:
             if ite >= 40 and ite % 10 == 0:
