@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="465f5086-e663-4d54-97a4-79214727de57" name="Default Changelist" comment="大修改完善。">
+    <list default="true" id="465f5086-e663-4d54-97a4-79214727de57" name="Default Changelist" comment="统一正则化">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TraderEnv.py" beforeDir="false" afterPath="$PROJECT_DIR$/TraderEnv.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ddqn_rl_trader.py" beforeDir="false" afterPath="$PROJECT_DIR$/ddqn_rl_trader.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -115,7 +114,7 @@
       <workItem from="1617671670879" duration="223000" />
       <workItem from="1617672703374" duration="15612000" />
       <workItem from="1617701574272" duration="622000" />
-      <workItem from="1617702218025" duration="7085000" />
+      <workItem from="1617702218025" duration="8181000" />
     </task>
     <task id="LOCAL-00001" summary="return back">
       <created>1616130347108</created>
@@ -306,7 +305,21 @@
       <option name="project" value="LOCAL" />
       <updated>1617153961509</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="统一正则化">
+      <created>1617718984517</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1617718984517</updated>
+    </task>
+    <task id="LOCAL-00029" summary="统一正则化">
+      <created>1617719044611</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1617719044611</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -344,7 +357,8 @@
     <MESSAGE value="np.array float32" />
     <MESSAGE value="调参手续费、dropout" />
     <MESSAGE value="大修改完善。" />
-    <option name="LAST_COMMIT_MESSAGE" value="大修改完善。" />
+    <MESSAGE value="统一正则化" />
+    <option name="LAST_COMMIT_MESSAGE" value="统一正则化" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

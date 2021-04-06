@@ -48,8 +48,8 @@ def load_from_csv(path):
 def main():
     # OPTIONS
     ENV_NAME = 'OHLCV-v0'
-    TIME_STEP = 100
-    BATCH_SIZE = 100
+    TIME_STEP = 300
+    BATCH_SIZE = 30
     # 1000-100=1s 1000-250=2.2s,1000-500=4.18s,500-500=2.1s,500-250=1.1s
 
     # Get the environment and extract the number of actions.
@@ -71,7 +71,7 @@ def main():
     # print(model.summary())
 
     # Finally, we configure and compile our agent. You can use every built-in Keras optimizer and even the metrics!
-    memory = SequentialMemory(limit=100000, window_length=TIME_STEP)
+    memory = SequentialMemory(limit=20000, window_length=TIME_STEP)
     # policy = BoltzmannQPolicy()
     policy = EpsGreedyQPolicy()
     # enable the dueling network
@@ -88,19 +88,14 @@ def main():
 
     ite = 0
     while True:
-        dqn.fit(env, nb_steps=10000, nb_max_episode_steps=10000, visualize=False, verbose=2)
+        dqn.fit(env, nb_steps=20000, nb_max_episode_steps=20000, visualize=False, verbose=2)
         ite += 1
         try:
             if ite >= 40 and ite % 10 == 0:
                 info = dqn.test(env_test, nb_episodes=1, visualize=False)
-                n_long, n_short, total_reward, portfolio = info['n_trades']['long'], info['n_trades']['short'], info[
-                    'total_reward'], int(info['portfolio'])
-                np.array([info]).dump(
-                    './info/duel_dqn_{0}_weights_{1}LS_{2}_{3}_{4}.info'.format(ENV_NAME, portfolio, n_long, n_short,
-                                                                                total_reward))
-                dqn.save_weights(
-                    './model/duel_dqn_{0}_weights_{1}LS_{2}_{3}_{4}.h5f'.format(ENV_NAME, portfolio, n_long, n_short,
-                                                                                total_reward), overwrite=True)
+                n_long, n_short, total_reward, portfolio = info['n_trades']['long'], info['n_trades']['short'], info['total_reward'], int(info['portfolio'])
+                np.array([info]).dump('./info/duel_dqn_{0}_weights_{1}LS_{2}_{3}_{4}.info'.format(ENV_NAME, portfolio, n_long, n_short, total_reward))
+                dqn.save_weights('./model/duel_dqn_{0}_weights_{1}LS_{2}_{3}_{4}.h5f'.format(ENV_NAME, portfolio, n_long, n_short, total_reward), overwrite=True)
             else:
                 dqn.save_weights('./model/duel_dqn_weights.h5f', overwrite=True)
         except KeyboardInterrupt:
