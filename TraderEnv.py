@@ -7,6 +7,7 @@ from gym.utils import seeding
 from pathlib import Path
 from sklearn import preprocessing
 from timethis import timethis
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
 # position constant
 LONG = 0
@@ -21,10 +22,9 @@ HOLD = 2
 
 class OhlcvEnv(gym.Env):
 
-    def __init__(self, window_size, path, show_trade=True, train=True):
+    def __init__(self, window_size, data, show_trade=True, train=True):
         self.show_trade = show_trade
         self.train = train
-        self.path = path
         self.actions = ["LONG", "SHORT", "FLAT"]
         self.fee = (1 - 0.001) ** 2
         self.maxdrawdown = 3/100.
@@ -32,7 +32,9 @@ class OhlcvEnv(gym.Env):
         self.seed()
         self.file_list = []
         # load_csv
-        self.load_from_csv()
+        # self.load_from_csv()
+        self.df = data
+        self.closingPrices = data[:, 0]
 
         # n_features
         self.window_size = window_size
@@ -42,24 +44,6 @@ class OhlcvEnv(gym.Env):
         # defines action space
         self.action_space = spaces.Discrete(len(self.actions))
         self.observation_space = spaces.Box(low=-np.inf, high=np.inf, shape=self.shape, dtype=np.float32)
-
-    def load_from_csv(self):
-        if len(self.file_list) == 0:
-            self.file_list = [x.name for x in Path(self.path).iterdir() if x.is_file()]
-            self.file_list.sort()
-        self.rand_episode = self.file_list.pop()
-        raw_df = pd.read_csv(self.path + self.rand_episode)
-        extractor = process_data.FeatureExtractor(raw_df)
-        self.df = extractor.add_bar_features()  # bar features o, h, l, c ---> C(4,2) = 4*3/2*1 = 6 features
-        self.df = extractor.add_mv_avg_features()
-        self.df = extractor.add_adj_features()
-        self.df = extractor.add_ta_features()
-
-        self.df.dropna(inplace=True)  # drops Nan rows
-        self.df = self.df.iloc[:, 4:].astype('float32')
-        self.closingPrices = self.df['close'].values
-        scaler = preprocessing.StandardScaler().fit(self.df)
-        self.df = scaler.transform(self.df)
 
     def render(self, mode='human', verbose=False):
         return None
@@ -157,7 +141,7 @@ class OhlcvEnv(gym.Env):
 
     def reset(self):
         self.current_tick = np.random.randint(0, self.df.shape[0]-self.window_size) if self.train else 0
-        print("start episode ... {0} at {1}".format(self.rand_episode, self.current_tick))
+        print("start episode ... at {0}".format(self.current_tick))
 
         # positions
         self.n_long = 0

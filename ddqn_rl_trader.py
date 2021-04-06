@@ -1,5 +1,8 @@
 import numpy as np
 import os
+import process_data
+import pandas as pd
+from pathlib import Path
 # import keras
 from keras.models import Sequential
 from keras.layers import Dense, Activation, Flatten, CuDNNLSTM, Dropout
@@ -9,6 +12,7 @@ from keras.optimizers import Adam
 from rl.agents.dqn import DQNAgent
 from rl.policy import BoltzmannQPolicy, EpsGreedyQPolicy
 from rl.memory import SequentialMemory
+from sklearn import preprocessing
 
 # trader environment
 from TraderEnv import OhlcvEnv
@@ -18,14 +22,31 @@ from util import NormalizerProcessor
 
 def create_model(shape, nb_actions):
     model = Sequential()
-    model.add(CuDNNLSTM(96, input_shape=shape, return_sequences=True))
+    model.add(CuDNNLSTM(64, input_shape=shape, return_sequences=True))
     # model.add(Dropout(0.3))
-    model.add(CuDNNLSTM(96))
+    model.add(CuDNNLSTM(64))
     # model.add(Dropout(0.3))
     model.add(Dense(32))
     model.add(Activation('relu'))
     model.add(Dense(nb_actions, activation='linear'))
     return model
+
+
+def load_from_csv(path):
+    file_list = [x.name for x in Path(path).iterdir() if x.is_file()]
+    file_list.sort()
+    rand_episode = file_list.pop()
+    raw_df = pd.read_csv(path + rand_episode)
+    extractor = process_data.FeatureExtractor(raw_df)
+    df = extractor.add_bar_features()  # bar features o, h, l, c ---> C(4,2) = 4*3/2*1 = 6 features
+    df = extractor.add_mv_avg_features()
+    df = extractor.add_adj_features()
+    df = extractor.add_ta_features()
+
+    df.dropna(inplace=True)  # drops Nan rows
+    df = df.iloc[:, 4:].astype('float32')
+    df = preprocessing.StandardScaler().fit(df).transform(df)
+    return df
 
 
 def main():
@@ -37,10 +58,13 @@ def main():
 
     # Get the environment and extract the number of actions.
     PATH_TRAIN = "./data/train/"
-    PATH_TEST = "./data/test/"
+    # PATH_TEST = "./data/test/"
     PATH_MODEL = "./model/duel_dqn_weights.h5f"
-    env = OhlcvEnv(TIME_STEP, path=PATH_TRAIN)
-    env_test = OhlcvEnv(TIME_STEP, path=PATH_TEST, train=False)
+    df = load_from_csv(PATH_TRAIN)
+    tran = int(len(df)*0.8)
+
+    env = OhlcvEnv(TIME_STEP, df[:tran, :])
+    env_test = OhlcvEnv(TIME_STEP, df[tran+1:, :], train=False)
 
     # random seed
     np.random.seed(BATCH_SIZE + TIME_STEP)
@@ -51,15 +75,16 @@ def main():
     # print(model.summary())
 
     # Finally, we configure and compile our agent. You can use every built-in Keras optimizer and even the metrics!
-    memory = SequentialMemory(limit=20000, window_length=TIME_STEP)
+    memory = SequentialMemory(limit=100000, window_length=TIME_STEP)
     # policy = BoltzmannQPolicy()
     policy = EpsGreedyQPolicy()
     # enable the dueling network
     # you can specify the dueling_type to one of {'avg','max','naive'}
-    dqn = DQNAgent(model=model, nb_actions=nb_actions, memory=memory, batch_size=BATCH_SIZE, nb_steps_warmup=int(BATCH_SIZE + TIME_STEP),
+    dqn = DQNAgent(model=model, nb_actions=nb_actions, memory=memory, batch_size=BATCH_SIZE,
+                   nb_steps_warmup=int(BATCH_SIZE + TIME_STEP),
                    enable_dueling_network=True, dueling_type='avg', target_model_update=100, policy=policy, gamma=.95,
                    processor=None)
-    dqn.compile(Adam(lr=2e-3), metrics=['mae'])
+    dqn.compile(Adam(lr=1e-2), metrics=['mae'])
 
     if os.path.exists(PATH_MODEL):
         dqn.load_weights(PATH_MODEL)
@@ -67,7 +92,7 @@ def main():
 
     ite = 0
     while True:
-        dqn.fit(env, nb_steps=15000, nb_max_episode_steps=15000, visualize=False, verbose=2)
+        dqn.fit(env, nb_steps=10000, nb_max_episode_steps=10000, visualize=False, verbose=2)
         ite += 1
         try:
             if ite >= 40 and ite % 10 == 0:
