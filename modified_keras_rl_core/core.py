@@ -123,7 +123,7 @@ class Agent(object):
         did_abort = False
         try:
             while self.step < nb_steps:
-                if observation is None:  # start of a new episode   新剧集的开始
+                if observation is None:  # start of a new episode   开始新的迭代
                     callbacks.on_episode_begin(episode)
                     episode_step = np.int16(0)
                     episode_reward = np.float32(0)
@@ -184,12 +184,6 @@ class Agent(object):
                     if self.processor is not None:
                         observation, r, done, info = self.processor.process_step(observation, r, done, info)
                     final_info = info
-                    # for key, value in info.items():
-                    #     if not np.isreal(value):
-                    #         continue
-                    #     if key not in accumulated_info:
-                    #         accumulated_info[key] = np.zeros_like(value)
-                    #     accumulated_info[key] += value
                     callbacks.on_action_end(action)
                     reward += r
                     if done:
@@ -214,6 +208,7 @@ class Agent(object):
                 self.step += 1
 
                 if done:
+                    # episode_step >= nb_max_episode_steps - 1
                     # We are in a terminal state but the agent hasn't yet seen it. We therefore
                     # perform one more forward-backward call and simply ignore the action before
                     # resetting the environment. We need to pass in `terminal=False` here since

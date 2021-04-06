@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="465f5086-e663-4d54-97a4-79214727de57" name="Default Changelist" comment="统一正则化">
+    <list default="true" id="465f5086-e663-4d54-97a4-79214727de57" name="Default Changelist" comment="调整参数">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ddqn_rl_trader.py" beforeDir="false" afterPath="$PROJECT_DIR$/ddqn_rl_trader.py" afterDir="false" />
     </list>
@@ -114,7 +114,7 @@
       <workItem from="1617671670879" duration="223000" />
       <workItem from="1617672703374" duration="15612000" />
       <workItem from="1617701574272" duration="622000" />
-      <workItem from="1617702218025" duration="8181000" />
+      <workItem from="1617702218025" duration="9489000" />
     </task>
     <task id="LOCAL-00001" summary="return back">
       <created>1616130347108</created>
@@ -319,7 +319,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617719044611</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="调整参数">
+      <created>1617720180268</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1617720180268</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -358,7 +365,8 @@
     <MESSAGE value="调参手续费、dropout" />
     <MESSAGE value="大修改完善。" />
     <MESSAGE value="统一正则化" />
-    <option name="LAST_COMMIT_MESSAGE" value="统一正则化" />
+    <MESSAGE value="调整参数" />
+    <option name="LAST_COMMIT_MESSAGE" value="调整参数" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -377,7 +385,7 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/deep_rl_trader$ddqn_rl_trader.coverage" NAME="ddqn_rl_trader Coverage Results" MODIFIED="1617718875474" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/deep_rl_trader$ddqn_rl_trader.coverage" NAME="ddqn_rl_trader Coverage Results" MODIFIED="1617720163862" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/deep_rl_trader$test.coverage" NAME="test Coverage Results" MODIFIED="1616735413571" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
