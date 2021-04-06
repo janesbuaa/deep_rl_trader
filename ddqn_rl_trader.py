@@ -16,16 +16,12 @@ from sklearn import preprocessing
 
 # trader environment
 from TraderEnv import OhlcvEnv
-# custom normalizer
-from util import NormalizerProcessor
 
 
 def create_model(shape, nb_actions):
     model = Sequential()
     model.add(CuDNNLSTM(64, input_shape=shape, return_sequences=True))
-    # model.add(Dropout(0.3))
     model.add(CuDNNLSTM(64))
-    # model.add(Dropout(0.3))
     model.add(Dense(32))
     model.add(Activation('relu'))
     model.add(Dense(nb_actions, activation='linear'))

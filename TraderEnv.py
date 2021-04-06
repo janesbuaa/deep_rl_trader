@@ -4,10 +4,6 @@ import numpy as np
 import gym
 from gym import spaces
 from gym.utils import seeding
-from pathlib import Path
-from sklearn import preprocessing
-from timethis import timethis
-from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
 # position constant
 LONG = 0
