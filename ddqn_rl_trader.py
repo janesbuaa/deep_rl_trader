@@ -79,8 +79,8 @@ def main():
     # you can specify the dueling_type to one of {'avg','max','naive'}
     dqn = DQNAgent(model=model, nb_actions=nb_actions, memory=memory, batch_size=BATCH_SIZE,
                    nb_steps_warmup=int(BATCH_SIZE + TIME_STEP),
-                   enable_dueling_network=True, dueling_type='avg', target_model_update=100, policy=policy, gamma=.95)
-    dqn.compile(Adam(lr=1e-2), metrics=['mae'])
+                   enable_dueling_network=True, dueling_type='avg', target_model_update=100, policy=policy, gamma=.9)
+    dqn.compile(Adam(lr=1e-3), metrics=['mae'])
 
     if os.path.exists(PATH_MODEL):
         dqn.load_weights(PATH_MODEL)
