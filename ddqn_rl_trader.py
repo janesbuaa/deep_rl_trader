@@ -57,6 +57,7 @@ def main():
     # PATH_TEST = "./data/test/"
     PATH_MODEL = "./model/duel_dqn_weights.h5f"
     df = load_from_csv(PATH_TRAIN)
+    df[:, 0] += abs(np.min(df[:, 0])) + 1
     tran = int(len(df)*0.8)
 
     env = OhlcvEnv(TIME_STEP, df[:tran, :])
