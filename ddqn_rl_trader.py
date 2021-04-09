@@ -48,7 +48,7 @@ def load_from_csv(path):
 def main():
     # OPTIONS
     ENV_NAME = 'OHLCV-v0'
-    TIME_STEP = 300
+    TIME_STEP = 500
     BATCH_SIZE = 30
     # 1000-100=1s 1000-250=2.2s,1000-500=4.18s,500-500=2.1s,500-250=1.1s
 
@@ -80,7 +80,7 @@ def main():
     dqn = DQNAgent(model=model, nb_actions=nb_actions, memory=memory, batch_size=BATCH_SIZE,
                    nb_steps_warmup=int(BATCH_SIZE + TIME_STEP),
                    enable_dueling_network=True, dueling_type='avg', target_model_update=100, policy=policy, gamma=.9)
-    dqn.compile(Adam(lr=1e-3), metrics=['mae'])
+    dqn.compile(Adam(lr=3e-3), metrics=['mae'])
 
     if os.path.exists(PATH_MODEL):
         dqn.load_weights(PATH_MODEL)
@@ -88,7 +88,7 @@ def main():
 
     ite = 0
     while True:
-        dqn.fit(env, nb_steps=20000, nb_max_episode_steps=20000, visualize=False, verbose=2)
+        dqn.fit(env, nb_steps=30000, nb_max_episode_steps=30000, visualize=False, verbose=2)
         ite += 1
         try:
             if ite >= 40 and ite % 10 == 0:
