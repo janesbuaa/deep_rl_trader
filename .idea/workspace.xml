@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="465f5086-e663-4d54-97a4-79214727de57" name="Default Changelist" comment="收盘价全正值">
+    <list default="true" id="465f5086-e663-4d54-97a4-79214727de57" name="Default Changelist" comment="10e-3lr">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ddqn_rl_trader.py" beforeDir="false" afterPath="$PROJECT_DIR$/ddqn_rl_trader.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/duel_dqn_weights.h5f" beforeDir="false" afterPath="$PROJECT_DIR$/model/duel_dqn_weights.h5f" afterDir="false" />
@@ -33,8 +33,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Binance_Historical_Kline" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager" selected="Python.ddqn_rl_trader">
     <configuration name="ddqn_rl_trader" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -115,7 +115,9 @@
       <workItem from="1617671670879" duration="223000" />
       <workItem from="1617672703374" duration="15612000" />
       <workItem from="1617701574272" duration="622000" />
-      <workItem from="1617702218025" duration="25931000" />
+      <workItem from="1617702218025" duration="46143000" />
+      <workItem from="1617980804375" duration="43000" />
+      <workItem from="1617981597063" duration="1396000" />
     </task>
     <task id="LOCAL-00001" summary="return back">
       <created>1616130347108</created>
@@ -341,7 +343,21 @@
       <option name="project" value="LOCAL" />
       <updated>1617756326578</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="10e-3lr">
+      <created>1617804243838</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1617804243838</updated>
+    </task>
+    <task id="LOCAL-00034" summary="10e-3lr">
+      <created>1617982088657</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1617982088658</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -382,7 +398,8 @@
     <MESSAGE value="统一正则化" />
     <MESSAGE value="调整参数" />
     <MESSAGE value="收盘价全正值" />
-    <option name="LAST_COMMIT_MESSAGE" value="收盘价全正值" />
+    <MESSAGE value="10e-3lr" />
+    <option name="LAST_COMMIT_MESSAGE" value="10e-3lr" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -401,7 +418,7 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/deep_rl_trader$ddqn_rl_trader.coverage" NAME="ddqn_rl_trader Coverage Results" MODIFIED="1617800648742" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/deep_rl_trader$ddqn_rl_trader.coverage" NAME="ddqn_rl_trader Coverage Results" MODIFIED="1617981810963" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/deep_rl_trader$test.coverage" NAME="test Coverage Results" MODIFIED="1616735413571" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
